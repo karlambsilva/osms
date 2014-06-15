@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:h="http://java.sun.com/jsf/html">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+		<title>Search Category</title>
+	</head>
+	<body>		
+		<h:form>
+			<h1>Search Category</h1>
+			Name:
+			<h:inputText value="#{searchCategory.options.name}"></h:inputText>
+			
+			<br/>
+			Description
+			<h:inputText value="#{searchCategory.options.description}"></h:inputText>
+			
+			<h:commandButton value="Search" action="#{searchCategory.search}"></h:commandButton>
+			
+			<br/><br/>	
+			Results: 
+			<h:dataTable value="#{searchCategory.result}" var="category">
+				<h:column>
+					#{category.name}
+				</h:column>
+				<h:column>
+					#{category.description}
+				</h:column>	
+				<h:column>
+					<h:commandButton value="Update" action="#{searchCategory.update(category)}"></h:commandButton>
+				</h:column>
+				<h:column>
+					<h:commandButton value="Delete" action="#{searchCategory.delete(category)}"></h:commandButton>
+				</h:column>					
+			</h:dataTable>
+		</h:form>
+	</body>
+</html>

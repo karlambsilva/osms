@@ -33,6 +33,7 @@ public class Tag {
 		this.id = id;
 	}
 	
+	@Column(name="TAG_NAME")
 	public String getName() {
 		return name;
 	}

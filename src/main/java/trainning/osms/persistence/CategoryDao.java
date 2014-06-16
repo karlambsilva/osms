@@ -55,7 +55,7 @@ public class CategoryDao {
 		EntityManager manager = factory.createEntityManager();	
 		
 		TypedQuery<Category> query = manager.createQuery(
-				"SELECT category FROM trainning.osm.business.Category category where " + predicate, 
+				"SELECT category FROM trainning.osms.business.Category category where " + predicate, 
 				Category.class);
 		
 		if(options.getName() != null && options.getName().length() > 0){

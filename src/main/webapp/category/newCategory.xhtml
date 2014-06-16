@@ -1,27 +1,27 @@
 <?xml version="1.0" encoding="ISO-8859-1" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-	  xmlns:h="http://java.sun.com/jsf/html">
-	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
-		<title>New Category</title>
-	</head>
-	<body>		
-		<h:form id="form">
-			<h1>New Category</h1>
-		
-			Name:
-			<h:inputText  id="name" value="#{newCategory.category.name}"></h:inputText>
-			<h:message for="name"></h:message>
-			
-			<br/>
-			
-			Description:
-			<h:inputTextarea rows="10" value="#{newCategory.category.description}"></h:inputTextarea>
-			
-			<h:commandButton value="Save" action="#{newCategory.saveCategory}"/>
-			
-			
-		</h:form>
-	</body>
+	  xmlns:osms="http://java.sun.com/jsf/composite/osms"
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:ui="http://java.sun.com/jsf/facelets"
+	  xmlns:f="http://java.sun.com/jsf/core">
+	  
+	<ui:composition template="/template.xhtml">  
+		<ui:define name="title">
+			New Category
+		</ui:define>
+		<ui:define name="content">
+		  	<h:form styleClass="form-horizontal" >
+				<h1>New Category</h1>
+							
+				<osms:category category="#{newCategory.category}">
+					<f:facet name="buttons">
+						<h:commandButton class="btn btn-primary" value="Save" action="#{newCategory.save}"/>
+					</f:facet>
+				</osms:category>
+					
+				<h:messages/>
+			</h:form>
+	  	</ui:define>
+	</ui:composition>
 </html>

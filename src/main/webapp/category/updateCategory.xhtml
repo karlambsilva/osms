@@ -1,25 +1,28 @@
 <?xml version="1.0" encoding="ISO-8859-1" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-	  xmlns:h="http://java.sun.com/jsf/html">
-	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
-		<title>Update Category</title>
-	</head>
-	<body>		
-		<h:form>
-			<h1>Update Category</h1>
-			Name:
-			<h:inputText value="#{searchCategory.category.name}"></h:inputText>
-			
-			<br/>
-			Description
-			<h:inputText value="#{searchCategory.category.description}"></h:inputText>
-			
-			<h:commandButton value="Search" action="#{searchCategory.confirmUpdate}"></h:commandButton>
-			
-			<h:button value="Back" outcome="searchCategory"/>
-			
-		</h:form>
-	</body>
+	  xmlns:osms="http://java.sun.com/jsf/composite/osms"
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:ui="http://java.sun.com/jsf/facelets"
+	  xmlns:f="http://java.sun.com/jsf/core">
+	  
+	<ui:composition template="/template.xhtml">  
+		<ui:define name="title">
+			Update Category
+		</ui:define>
+		<ui:define name="content">
+		  	<h:form styleClass="form-horizontal" >
+				<h1>Update Category</h1>
+							
+				<osms:category category="#{searchCategory.category}">
+					<f:facet name="buttons">
+						<h:commandButton class="btn btn-primary" value="Save" action="#{searchCategory.confirmUpdate}"/>
+						<h:button class="btn btn-primary" value="Back" outcome="searchCategory"/>
+					</f:facet>
+				</osms:category>
+					
+				<h:messages/>
+			</h:form>
+	  	</ui:define>
+	</ui:composition>
 </html>

@@ -15,6 +15,7 @@ public class SearchCategory {
 	private List<Category> result;
 	private CategorySearchOptions options;
 	private Category category;
+	private boolean categoryDeleted;
 	
 	
 	public SearchCategory() {
@@ -50,9 +51,23 @@ public class SearchCategory {
 		this.category = category;
 	}
 	
+	public boolean isCategoryDeleted() {
+		return categoryDeleted;
+	}
+
+	public void setCategoryDeleted(boolean categoryDeleted) {
+		this.categoryDeleted = categoryDeleted;
+	}
+
 	public void search(){		
 		CategoryController controller = new CategoryController();
 		result = controller.searchCategory(options);
+		
+		/*
+		for (Category a: result){
+			System.out.println(a.getName() + " ");
+		}
+		*/
 	}
 	
 	public String update(Category category){
@@ -84,18 +99,27 @@ public class SearchCategory {
 
 		FacesContext context = FacesContext.getCurrentInstance();
 		context.addMessage(null, message);
-		//context.addMessage("form:name", message);
 	}
 	
 	
 	public String delete(Category category){
 		this.category = category;
+		this.categoryDeleted = false;
 		return "deleteCategory";
 	}
 	
 	public void confirmDeletion(){
 		CategoryController controller = new CategoryController();
 		controller.deleteCategory(category);
+		this.categoryDeleted = true; // disable delete button. evita do usuário tentar deletar a mesma coisa 2x
+		reset();
+		
+		FacesMessage message = new FacesMessage();
+		message.setSummary("Category successufully deleted");
+		message.setSeverity(FacesMessage.SEVERITY_INFO);
+
+		FacesContext context = FacesContext.getCurrentInstance();
+		context.addMessage(null, message);
 	}
 	 
 }

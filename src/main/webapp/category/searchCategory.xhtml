@@ -1,39 +1,48 @@
 <?xml version="1.0" encoding="ISO-8859-1" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-	  xmlns:h="http://java.sun.com/jsf/html">
-	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
-		<title>Search Category</title>
-	</head>
-	<body>		
-		<h:form>
-			<h1>Search Category</h1>
-			Name:
-			<h:inputText value="#{searchCategory.options.name}"></h:inputText>
+	  xmlns:osms="http://java.sun.com/jsf/composite/osms"
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:ui="http://java.sun.com/jsf/facelets"
+	  xmlns:f="http://java.sun.com/jsf/core">
+	<ui:composition template="/template.xhtml">  
+	  	<ui:define name="title">
+	  		Search Category
+	  	</ui:define>
+	  	<ui:define name="content">
+	  		<h:form styleClass="form-horizontal">
+				<h1>Search Category</h1>
+				
+				<osms:categorySearchOptions categorySearchOptions="#{searchCategory.options}">
+					<f:facet name="buttons">
+						<h:commandButton class="btn-btn-primary" value="Search" action="#{searchCategory.search}"></h:commandButton>
+					</f:facet>				
+				</osms:categorySearchOptions>
 			
-			<br/>
-			Description
-			<h:inputText value="#{searchCategory.options.description}"></h:inputText>
-			
-			<h:commandButton value="Search" action="#{searchCategory.search}"></h:commandButton>
-			
-			<br/><br/>	
-			Results: 
-			<h:dataTable value="#{searchCategory.result}" var="category">
-				<h:column>
-					#{category.name}
-				</h:column>
-				<h:column>
-					#{category.description}
-				</h:column>	
-				<h:column>
-					<h:commandButton value="Update" action="#{searchCategory.update(category)}"></h:commandButton>
-				</h:column>
-				<h:column>
-					<h:commandButton value="Delete" action="#{searchCategory.delete(category)}"></h:commandButton>
-				</h:column>					
-			</h:dataTable>
-		</h:form>
-	</body>
+				<h:dataTable styleClass="table table-bordered table-condensed table-hover" value="#{searchCategory.result}" var="category"
+							 columnClasses="col-sm-5, col-sm-6" rendered="#{searchCategory.result.isEmpty() == false}">
+					<h:column>
+						<f:facet name="header">
+							Name
+						</f:facet>
+						#{category.name}
+					</h:column>
+					<h:column>
+						<f:facet name="header">
+							Description
+						</f:facet>
+						#{category.description}
+					</h:column>
+					<h:column>
+						<div class="btn-toolbar">
+							<h:commandLink class="btn btn-primary glyphicon glyphicon-pencil" action="#{searchCategory.update(category)}" title="Update">
+							</h:commandLink>							
+							<h:commandLink class="btn btn-danger glyphicon glyphicon-trash" action="#{searchCategory.delete(category)}" title="Delete">
+							</h:commandLink>
+						</div>
+					</h:column>	
+				</h:dataTable>
+			</h:form>
+	  	</ui:define>
+	</ui:composition>
 </html>

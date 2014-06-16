@@ -25,7 +25,7 @@ public class NewCategory {
 		this.category = category;
 	}
 	
-	public void saveCategory(){				
+	public void save(){				
 		FacesMessage message = new FacesMessage();
 		
 		try{
@@ -39,7 +39,7 @@ public class NewCategory {
 		}	
 
 		FacesContext context = FacesContext.getCurrentInstance();
-		context.addMessage("form:name", message);
+		context.addMessage(null, message);
 		
 	}
 

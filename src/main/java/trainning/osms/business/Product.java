@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -39,6 +40,7 @@ public class Product {
 		this.id = id;
 	}
 	
+	@Column(name="PRO_NAME")
 	public String getName() {
 		return name;
 	}
@@ -47,6 +49,7 @@ public class Product {
 		this.name = name;
 	}
 	
+	@Column(name="PRO_DESCRIPTION")
 	public String getDescription() {
 		return description;
 	}
@@ -55,6 +58,7 @@ public class Product {
 		this.description = description;
 	}
 	
+	@Column(name="PRO_PRICE")
 	public double getPrice() {
 		return price;
 	}
@@ -64,6 +68,7 @@ public class Product {
 	}
 	
 	@ManyToOne
+	@JoinColumn(name="CAT_ID")
 	public Category getCategory() {
 		return category;
 	}
@@ -72,6 +77,7 @@ public class Product {
 		this.category = category;
 	}
 	
+	@Column(name="PRO_IMAGE")
 	public String getImage() {
 		return image;
 	}
@@ -81,6 +87,7 @@ public class Product {
 	}
 	
 	@ManyToMany
+	@JoinColumn(name="TAG_ID")
 	public List<Tag> getTags() {
 		return tags;
 	}

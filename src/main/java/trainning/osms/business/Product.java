@@ -9,7 +9,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -23,11 +22,7 @@ public class Product {
 	private double price;
 	private Category category;
 	private String image;
-	private List<Tag> tags;
-	
-	public Product() {
-		tags = new ArrayList<>();
-	}
+
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -85,15 +80,6 @@ public class Product {
 	public void setImage(String image) {
 		this.image = image;
 	}
-	
-	@ManyToMany
-	@JoinColumn(name="TAG_ID")
-	public List<Tag> getTags() {
-		return tags;
-	}
-	
-	public void setTags(List<Tag> tags) {
-		this.tags = tags;
-	}	
+
 
 }

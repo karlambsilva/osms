@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:osms="http://java.sun.com/jsf/composite/osms"
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:ui="http://java.sun.com/jsf/facelets"
+	  xmlns:f="http://java.sun.com/jsf/core">
+	  
+	<ui:composition template="/template.xhtml">  
+		<ui:define name="title">
+			Search Product
+		</ui:define>
+		<ui:define name="content">
+		  	<h:form styleClass="form-horizontal" >
+				<h1>Search Product</h1>
+				<osms:productSearchOptions options="#{searchProduct.options}">
+					<f:facet name="buttons">
+						<h:commandButton class="btn btn-primary" value="Search" action="#{searchProduct.search}"></h:commandButton>
+					</f:facet>
+				</osms:productSearchOptions>				
+			</h:form>
+			<h:form>			
+				<h:dataTable styleClass="table table-bordered table-condensed table-hover" value="#{searchProduct.result}" var="product"
+							 columnClasses="col-sm-6, col-sm-6" >
+					<h:column>
+						<f:facet name="header">
+							Title
+						</f:facet>
+						#{product.title}
+					</h:column>
+					<h:column>
+						<f:facet name="header">
+							Body
+						</f:facet>
+						#{product.body}
+					</h:column>	
+					
+					<h:column>
+						<h:commandLink class="btn btn-primary glyphicon glyphicon-pencil" action="#{searchProduct.update(product)}"
+							title="Update">
+						</h:commandLink>							
+					</h:column>
+					<h:column>
+						<h:commandLink class="btn btn-danger glyphicon glyphicon-trash" action="#{searchProduct.delete(product)}"
+								title="Delete">
+							</h:commandLink>
+					</h:column>		
+				</h:dataTable>
+				<center>
+					<ul class="pagination">
+						<ui:repeat value="#{searchProduct.pages}" var="page">
+							<li class="#{page == searchProduct.page ? 'active' : ''}">
+								<h:commandLink value="#{page}" action="#{searchProduct.goToPage(page)}">
+									<f:ajax render="@form"></f:ajax>
+								</h:commandLink>								
+							</li>
+						</ui:repeat>					
+					</ul>
+				</center>
+				
+			</h:form>
+		</ui:define>
+	</ui:composition>
+</html>

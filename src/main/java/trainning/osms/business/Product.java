@@ -1,8 +1,5 @@
 package trainning.osms.business;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,10 +8,11 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name="PRO_PRODUCT")
-public class Product {
+public class Product implements Cloneable{
 	
 	private Integer id;
 	private String name;
@@ -45,6 +43,7 @@ public class Product {
 	}
 	
 	@Column(name="PRO_DESCRIPTION")
+	@Size(min=1, max=10000)
 	public String getDescription() {
 		return description;
 	}
@@ -80,6 +79,16 @@ public class Product {
 	public void setImage(String image) {
 		this.image = image;
 	}
+
+	@Override
+	public Product clone() {
+		try {
+			return (Product) super.clone();
+		} catch (CloneNotSupportedException e) {
+			throw new Error(" A VM está louca!");
+		}  
+	}
+
 
 
 }

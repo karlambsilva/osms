@@ -4,6 +4,7 @@
     		  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     		  xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd"
     		  version="2.2">
+	
 	<navigation-rule>
 		<from-view-id>*</from-view-id>
 		<navigation-case>
@@ -25,6 +26,30 @@
 		<navigation-case>
 			<from-outcome>searchCategory</from-outcome>
 			<to-view-id>/category/searchCategory.xhtml</to-view-id>
+		</navigation-case>	
+	</navigation-rule>  
+	
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>updateProduct</from-outcome>
+			<to-view-id>/product/updateProduct.xhtml</to-view-id>
+		</navigation-case>	
+	</navigation-rule>    
+	
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>deleteProduct</from-outcome>
+			<to-view-id>/product/deleteProduct.xhtml</to-view-id>
+		</navigation-case>	
+	</navigation-rule>  
+	
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>searchProduct</from-outcome>
+			<to-view-id>/product/searchProduct.xhtml</to-view-id>
 		</navigation-case>	
 	</navigation-rule>  
 			 

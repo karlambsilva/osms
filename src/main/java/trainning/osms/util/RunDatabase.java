@@ -10,17 +10,14 @@ public class RunDatabase {
 		
 		runDatabase();
 		
-		CreateDatabase createDB = new CreateDatabase();
-		createDB.populateDatabase();
-		
 	}
 	
 	public static void runDatabase() throws SQLException, IOException{
 		Server server = Server.createTcpServer(); // Vamos usar um BD que fica escutando a porta TCP
 		server.start();
-		System.in.read();
 		System.out.println("DB successufully started.");
 		
+		System.in.read();
 		server.stop();
 	}
 }

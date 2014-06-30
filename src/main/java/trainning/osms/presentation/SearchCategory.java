@@ -1,22 +1,26 @@
 package trainning.osms.presentation;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+
 import trainning.osms.business.*;
 
 @ManagedBean
 @SessionScoped
 public class SearchCategory {
 	
+	private static final int RESULTS_PER_PAGE = 2;
 	private List<Category> result;
 	private CategorySearchOptions options;
 	private Category category;
 	private boolean categoryDeleted;
-	
+	private List<Integer> pages;
+	private int page;
 	
 	public SearchCategory() {
 		reset();
@@ -59,23 +63,62 @@ public class SearchCategory {
 		this.categoryDeleted = categoryDeleted;
 	}
 
-	public void search(){		
-		CategoryController controller = new CategoryController();
-		result = controller.searchCategory(options);
-		
-		/*
-		for (Category a: result){
-			System.out.println(a.getName() + " ");
-		}
-		*/
+	public List<Integer> getPages() {
+		return pages;
 	}
 	
+	public void setPages(List<Integer> pages) {
+		this.pages = pages;
+	}
+	
+	public int getPage() {
+		return page;
+	}
+	
+	public void setPage(int page) {
+		this.page = page;
+	}
+	
+	public static int getResultsPerPage() {
+		return RESULTS_PER_PAGE;
+	}
+	
+	public void search(){		
+		
+		CategoryController controller = new CategoryController();
+		
+		int resultCount = controller.searchCategoryCount(options);
+		int pageCount = resultCount / RESULTS_PER_PAGE;
+		
+		if (resultCount % RESULTS_PER_PAGE > 0){
+			++pageCount;
+		}
+		
+		pages = new ArrayList<Integer>();		
+		for (int page = 1; page <= pageCount; ++page){
+			pages.add(page);
+		}
+		
+		goToPage(1);
+		
+	}
+	
+	public void goToPage(int page){
+		this.page = page;
+		
+		int startPosition = (page - 1) * RESULTS_PER_PAGE;
+		options.setStartPosition(startPosition);
+		options.setMaxResults(RESULTS_PER_PAGE);
+
+
+		CategoryController controller = new CategoryController();
+		result = controller.searchCategory(options);
+	}
+
 	public String update(Category category){
 		
 		Category categAux = new Category();
-		categAux.setId(category.getId());
-		categAux.setName(category.getName());
-		categAux.setDescription(category.getDescription());
+		categAux = category.clone();
 		
 		this.category = categAux; 
 		

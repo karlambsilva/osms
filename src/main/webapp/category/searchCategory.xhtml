@@ -15,7 +15,7 @@
 				
 				<osms:categorySearchOptions categorySearchOptions="#{searchCategory.options}">
 					<f:facet name="buttons">
-						<h:commandButton class="btn-btn-primary" value="Search" action="#{searchCategory.search}"></h:commandButton>
+						<h:commandButton class="btn btn-primary" value="Search" action="#{searchCategory.search}"></h:commandButton>
 					</f:facet>				
 				</osms:categorySearchOptions>
 			
@@ -42,6 +42,17 @@
 						</div>
 					</h:column>	
 				</h:dataTable>
+				<center>
+					<ul class="pagination">
+						<ui:repeat value="#{searchCategory.pages}" var="page">
+							<li class="#{page == searchCategory.page ? 'active' : ''}">
+								<h:commandLink value="#{page}" action="#{searchCategory.goToPage(page)}">
+									<f:ajax render="@form"></f:ajax>
+								</h:commandLink>								
+							</li>
+						</ui:repeat>					
+					</ul>
+				</center>
 			</h:form>
 	  	</ui:define>
 	</ui:composition>

@@ -1,10 +1,10 @@
 package trainning.osms.business;
 
-public class CategorySearchOptions {
+public class ProductSearchOptions {
 	
 	public enum Order{
 		NAME("name"),
-		DESCRIPTION("description");
+		PRICE("price");
 		
 		private String value;
 		
@@ -17,16 +17,18 @@ public class CategorySearchOptions {
 			return value;
 		}		
 	}
-	
-	private String name;
-	private String description;
-	
+	private Integer productId;
+	private Integer categoryId;	
 	private boolean desc;
 	private Order order;
 	private Integer startPosition;
 	private Integer maxResults;
 	
-	public CategorySearchOptions() {
+	private String name;
+	private String description;
+	private Double price;
+	
+	public ProductSearchOptions() {
 		order = Order.NAME;
 	}
 	
@@ -45,7 +47,23 @@ public class CategorySearchOptions {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	
+
+	public Integer getProductId() {
+		return productId;
+	}
+
+	public void setProductId(Integer productId) {
+		this.productId = productId;
+	}
+
+	public Integer getCategoryId() {
+		return categoryId;
+	}
+
+	public void setCategoryId(Integer categoryId) {
+		this.categoryId = categoryId;
+	}
+
 	public boolean isDesc() {
 		return desc;
 	}
@@ -76,6 +94,14 @@ public class CategorySearchOptions {
 
 	public void setMaxResults(Integer maxResults) {
 		this.maxResults = maxResults;
+	}
+
+	public Double getPrice() {
+		return price;
+	}
+
+	public void setPrice(Double price) {
+		this.price = price;
 	}
 
 	@Override

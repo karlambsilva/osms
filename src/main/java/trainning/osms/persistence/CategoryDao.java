@@ -2,14 +2,18 @@ package trainning.osms.persistence;
 
 import java.util.List;
 
-import javax.persistence.*;
-import trainning.osms.business.*;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.EntityTransaction;
+import javax.persistence.TypedQuery;
 
-public class CategoryDao {
-	
+import trainning.osms.business.Category;
+import trainning.osms.business.CategorySearchOptions;
+
+public class CategoryDao {	
 	
 	public boolean containsCategory(String categoryName){
-		return searchCategory(categoryName) != null; // esse search retorna null 9(não existem categorias com o criterio passado) ou 1 categoria. 
+		return searchCategory(categoryName) != null; // esse search retorna null (não existem categorias com o criterio passado) ou 1 categoria. 
 	}
 	
 	public void insertCategory(Category category){
@@ -42,6 +46,58 @@ public class CategoryDao {
 
 	public List<Category> searchCategory(CategorySearchOptions options) {
 		
+		StringBuilder predicate = toPredicate(options);
+
+		if(options.getOrder() != null){
+			predicate.append(" order by category.");
+			predicate.append(options.getOrder().getValue());
+			if(options.isDesc()){
+				predicate.append(" desc");
+			}
+		}	
+		
+		EntityManagerFactory factory = EntityManagerFactoryHolder.factory;
+		EntityManager manager = factory.createEntityManager();	
+		
+		TypedQuery<Category> query = manager.createQuery(
+				"SELECT category FROM trainning.osms.business.Category category where " + predicate, 
+				Category.class);
+		
+		
+		setParameters(options, query);
+		
+		if (options.getStartPosition() != null){
+			query.setFirstResult(options.getStartPosition());
+		}			
+		if (options.getMaxResults() != null){
+			query.setMaxResults(options.getMaxResults());
+		}			
+		
+		List<Category> result = query.getResultList();
+		
+		return result;
+	}
+	
+	public int searchCategoryCount(CategorySearchOptions options) {
+
+		StringBuilder predicate = toPredicate(options);			
+
+		EntityManagerFactory factory = EntityManagerFactoryHolder.factory;
+		EntityManager manager = factory.createEntityManager();	
+		
+		TypedQuery<Long> query = manager.createQuery(
+				"SELECT count(category) FROM trainning.osms.business.Category category where " + predicate, 
+				Long.class);		
+
+		setParameters(options, query);
+
+		Long result = query.getSingleResult();
+
+		return result.intValue();		
+
+	}
+	
+	private StringBuilder toPredicate(CategorySearchOptions options) {
 		StringBuilder predicate = new StringBuilder("1 = 1"); // só para a concatenação funcionar perfeitamente por causa dos ands
 		
 		if(options.getName() != null && options.getName().length() > 0){
@@ -51,31 +107,19 @@ public class CategoryDao {
 			predicate.append(" and upper(category.description) like :categoryDescription");
 		}
 		
-		EntityManagerFactory factory = EntityManagerFactoryHolder.factory;
-		EntityManager manager = factory.createEntityManager();	
-		
-		TypedQuery<Category> query = manager.createQuery(
-				"SELECT category FROM trainning.osms.business.Category category where " + predicate, 
-				Category.class);
-		
+		return predicate;
+	}
+
+	private void setParameters(CategorySearchOptions options, TypedQuery<?> query) {
+	
 		if(options.getName() != null && options.getName().length() > 0){
 			query.setParameter("categoryName", "%" + options.getName().toUpperCase() + "%"); // % significa qualquer coisa
 		}
 		if(options.getDescription() != null && options.getDescription().length() > 0){
 			query.setParameter("categoryDescription", "%" + options.getDescription().toUpperCase() + "%");
 		}
-		
-		/*TypedQuery<Category> query = manager.createQuery(
-				"SELECT category FROM trainning.osms.business.Category category WHERE UPPER(category.name) = :categoryName AND UPPER(category.description) = :categoryDescription", 
-				Category.class);
-		query.setParameter("categoryName", options.getName().toUpperCase());
-		query.setParameter("categoryDescription", options.getDescription().toUpperCase());*/
-		
-		List<Category> result = query.getResultList();
-		
-		return result;
 	}
-
+	
 	public void deleteCategory(Category category) {
 		EntityManagerFactory factory = EntityManagerFactoryHolder.factory;
 		EntityManager manager = factory.createEntityManager();

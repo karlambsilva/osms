@@ -33,12 +33,11 @@ public class ProductController {
 	}
 	
 	public void updateProduct(Product product) {
-		
+		dao.updateProduct(product);
 	}
 
-	public int searchProductCount(ProductSearchOptions options) {
-		// TODO Auto-generated method stub
-		return 0;
+	public Integer searchProductCount(ProductSearchOptions options) {
+		return dao.searchProductCount(options);
 	}
 
 }

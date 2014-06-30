@@ -8,7 +8,6 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
-import training.bms.business.PostSearchOptions;
 import trainning.osms.business.BusinessException;
 import trainning.osms.business.Product;
 import trainning.osms.business.ProductController;
@@ -29,6 +28,11 @@ public class SearchProduct {
 	
 	public SearchProduct() {
 		reset();
+	}
+	
+	private void reset() {
+		options = new ProductSearchOptions();
+		result = null;
 	}
 	
 	public List<Product> getResult() {
@@ -169,10 +173,7 @@ public class SearchProduct {
 		
 	}
 
-	private void reset() {
-		options = new ProductSearchOptions();
-		result = null;
-	}
+	
 	
 	 
 }

@@ -33,6 +33,7 @@ public class Product implements Cloneable{
 		this.id = id;
 	}
 	
+	@Size(min=1, max=100, message = "Name must be between 0 and 100")
 	@Column(name="PRO_NAME")
 	public String getName() {
 		return name;
@@ -43,7 +44,7 @@ public class Product implements Cloneable{
 	}
 	
 	@Column(name="PRO_DESCRIPTION")
-	@Size(min=1, max=10000)
+	@Size(min=1, max=10000, message = "Description must be between 0 and 10000")
 	public String getDescription() {
 		return description;
 	}
@@ -85,7 +86,7 @@ public class Product implements Cloneable{
 		try {
 			return (Product) super.clone();
 		} catch (CloneNotSupportedException e) {
-			throw new Error(" A VM está louca!");
+			throw new Error("Cloning is not supported for this object.");
 		}  
 	}
 

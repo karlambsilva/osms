@@ -50,4 +50,8 @@ public class CategoryController {
 		}
 	}
 
+	public Integer searchCategoryCount(CategorySearchOptions options) {
+		return dao.searchCategoryCount(options);
+	}
+
 }

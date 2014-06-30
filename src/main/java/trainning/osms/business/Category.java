@@ -16,7 +16,7 @@ import javax.validation.constraints.Size;
 
 @Entity
 @Table(name="CAT_CATEGORY")
-public class Category {
+public class Category implements Cloneable{
 	
 	private Integer id;
 	private String name;
@@ -90,6 +90,14 @@ public class Category {
 		this.subCategories = subCategories;
 	}
 	
-	
+	@Override
+	public Category clone() {
+		try {
+			return (Category) super.clone();
+		} catch (CloneNotSupportedException e) {
+			throw new Error("Cloning is not supported for this object.");
+		}  
+	}
+
 
 }

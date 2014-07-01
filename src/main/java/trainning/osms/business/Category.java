@@ -3,6 +3,7 @@ package trainning.osms.business;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -62,7 +63,7 @@ public class Category implements Cloneable{
 		this.description = description;
 	}
 	
-	@OneToMany(mappedBy="category")
+	@OneToMany(mappedBy="category", cascade=CascadeType.REMOVE)
 	public List<Product> getProducts() {
 		return products;
 	}

@@ -2,15 +2,16 @@ package trainning.osms.business;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
+
 import trainning.osms.persistence.ProductDao;
 
+@Component
 public class ProductController {
 	
-	private ProductDao dao;
-	
-	public ProductController() {
-		dao = new ProductDao();
-	}
+	private @Autowired ProductDao dao;
 	
 	public ProductDao getDao() {
 		return dao;
@@ -20,6 +21,7 @@ public class ProductController {
 		this.dao = dao;
 	}
 	
+	@Transactional
 	public void saveProduct(Product product) {
 		dao.insertProduct(product);		
 	}
@@ -28,10 +30,12 @@ public class ProductController {
 		return dao.searchProduct(options);
 	}
 	
+	@Transactional
 	public void deleteProduct(Product product) {
 		dao.deleteProduct(product);
 	}
 	
+	@Transactional
 	public void updateProduct(Product product) {
 		dao.updateProduct(product);
 	}

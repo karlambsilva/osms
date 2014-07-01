@@ -4,18 +4,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.faces.application.FacesMessage;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
+import org.springframework.web.context.WebApplicationContext;
 
 import trainning.osms.business.BusinessException;
 import trainning.osms.business.Product;
 import trainning.osms.business.ProductController;
 import trainning.osms.business.ProductSearchOptions;
 
-
-@ManagedBean
-@SessionScoped
+@Component
+@Scope(WebApplicationContext.SCOPE_SESSION)
 public class SearchProduct {
 	
 	private static final int RESULTS_PER_PAGE = 2;
@@ -25,6 +27,8 @@ public class SearchProduct {
 	private boolean productDeleted;
 	private List<Integer> pages;
 	private int page;
+	
+	private @Autowired ProductController controller;
 	
 	public SearchProduct() {
 		reset();
@@ -87,8 +91,7 @@ public class SearchProduct {
 		return RESULTS_PER_PAGE;
 	}
 	
-	public void search(){		
-		ProductController controller = new ProductController();		
+	public void search(){
 		
 		int resultCount = controller.searchProductCount(options);
 		int pageCount = resultCount / RESULTS_PER_PAGE;
@@ -113,8 +116,6 @@ public class SearchProduct {
 		options.setStartPosition(startPosition);
 		options.setMaxResults(RESULTS_PER_PAGE);
 
-
-		ProductController controller = new ProductController();
 		result = controller.searchProduct(options);
 	}
 	
@@ -134,7 +135,6 @@ public class SearchProduct {
 		FacesMessage message = new FacesMessage();
 		
 		try{
-			ProductController controller = new ProductController();
 			controller.updateProduct(form.getProduct());
 			reset();
 			message.setSummary("Product successufully saved");
@@ -158,7 +158,6 @@ public class SearchProduct {
 	
 	public void confirmDeletion(){		
 		
-		ProductController controller = new ProductController();
 		controller.deleteProduct(form.getProduct());
 		this.productDeleted = true;
 		reset();

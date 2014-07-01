@@ -5,52 +5,34 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
+import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
+
+import org.springframework.stereotype.Component;
 
 import trainning.osms.business.Category;
 import trainning.osms.business.Product;
 import trainning.osms.business.ProductSearchOptions;
 
+@Component
 public class ProductDao {
 	
+	private @PersistenceContext EntityManager manager;
+	
 	public void insertProduct(Product product) {
-		EntityManagerFactory factory = EntityManagerFactoryHolder.factory;
-		EntityManager manager = factory.createEntityManager();		
-		EntityTransaction transaction = manager.getTransaction();
-		
-		transaction.begin();
-		manager.persist(product); 
-		transaction.commit();		
+		manager.persist(product); 	
 	}
 	
 	public void updateProduct(Product product) {
-
-		EntityManagerFactory factory = EntityManagerFactoryHolder.factory;
-		EntityManager manager = factory.createEntityManager();		
-		EntityTransaction transaction = manager.getTransaction();
-		
-		transaction.begin();
 		manager.merge(product); 
-		transaction.commit();
-		
 	}
 
 	public void deleteProduct(Product product) {
-		EntityManagerFactory factory = EntityManagerFactoryHolder.factory;
-		EntityManager manager = factory.createEntityManager();
-		EntityTransaction transaction = manager.getTransaction();
-		
 		Product managedProduct = manager.find(Product.class, product.getId()); 
-		
-		transaction.begin();
-		manager.remove(managedProduct); // o manager só consegue deletar os items q ele conhece.. por isso q preciso procurar pela categoria
-		transaction.commit();	
+		manager.remove(managedProduct); // o manager só consegue deletar os items q ele conhece.. por isso q preciso procurar pela categoria	
 	}	
 	
 	public Product searchProduct(String productName) {
-		EntityManagerFactory factory = EntityManagerFactoryHolder.factory;
-		EntityManager manager = factory.createEntityManager();	
-		
 		TypedQuery<Product> query = manager.createQuery(
 				"SELECT product FROM trainning.osms.business.Product product WHERE UPPER(product.name) = :productName", 
 				Product.class);
@@ -74,10 +56,7 @@ public class ProductDao {
 			if(options.isDesc()){
 				predicate.append(" desc");
 			}
-		}	
-
-		EntityManagerFactory factory = EntityManagerFactoryHolder.factory;
-		EntityManager manager = factory.createEntityManager();	
+		}		
 		
 		TypedQuery<Product> query = manager.createQuery(
 				"SELECT product FROM trainning.osms.business.Product product where " + predicate, 
@@ -99,9 +78,6 @@ public class ProductDao {
 	public int searchProductCount(ProductSearchOptions options) {
 
 		StringBuilder predicate = toPredicate(options);			
-
-		EntityManagerFactory factory = EntityManagerFactoryHolder.factory;
-		EntityManager manager = factory.createEntityManager();	
 		
 		TypedQuery<Long> query = manager.createQuery(
 				"SELECT count(product) FROM trainning.osms.business.Product product where " + predicate, 

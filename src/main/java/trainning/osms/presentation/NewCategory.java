@@ -4,14 +4,21 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
+import org.springframework.web.context.WebApplicationContext;
+
 import trainning.osms.business.Category;
 import trainning.osms.business.CategoryController;
 import trainning.osms.business.BusinessException;
 
-@ManagedBean
+@Component
+@Scope(WebApplicationContext.SCOPE_REQUEST)
 public class NewCategory {
 	
 	private Category category;
+	private @Autowired CategoryController controller;
 	
 	public NewCategory() {
 		category = new Category();
@@ -29,7 +36,6 @@ public class NewCategory {
 		FacesMessage message = new FacesMessage();
 		
 		try{
-			CategoryController controller = new CategoryController();
 			controller.saveCategory(category);
 			message.setSummary("Category successufully saved");
 			message.setSeverity(FacesMessage.SEVERITY_INFO);

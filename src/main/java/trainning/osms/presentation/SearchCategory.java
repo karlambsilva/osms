@@ -8,10 +8,15 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
+import org.springframework.web.context.WebApplicationContext;
+
 import trainning.osms.business.*;
 
-@ManagedBean
-@SessionScoped
+@Component
+@Scope(WebApplicationContext.SCOPE_SESSION)
 public class SearchCategory {
 	
 	private static final int RESULTS_PER_PAGE = 2;
@@ -21,6 +26,8 @@ public class SearchCategory {
 	private boolean categoryDeleted;
 	private List<Integer> pages;
 	private int page;
+	
+	private @Autowired CategoryController controller;
 	
 	public SearchCategory() {
 		reset();
@@ -85,8 +92,6 @@ public class SearchCategory {
 	
 	public void search(){		
 		
-		CategoryController controller = new CategoryController();
-		
 		int resultCount = controller.searchCategoryCount(options);
 		int pageCount = resultCount / RESULTS_PER_PAGE;
 		
@@ -110,8 +115,6 @@ public class SearchCategory {
 		options.setStartPosition(startPosition);
 		options.setMaxResults(RESULTS_PER_PAGE);
 
-
-		CategoryController controller = new CategoryController();
 		result = controller.searchCategory(options);
 	}
 
@@ -130,7 +133,6 @@ public class SearchCategory {
 		FacesMessage message = new FacesMessage();
 		
 		try{
-			CategoryController controller = new CategoryController();
 			controller.updateCategory(category);
 			reset();
 			message.setSummary("Category successufully saved");
@@ -152,7 +154,6 @@ public class SearchCategory {
 	}
 	
 	public void confirmDeletion(){
-		CategoryController controller = new CategoryController();
 		controller.deleteCategory(category);
 		this.categoryDeleted = true; // disable delete button. evita do usuário tentar deletar a mesma coisa 2x
 		reset();

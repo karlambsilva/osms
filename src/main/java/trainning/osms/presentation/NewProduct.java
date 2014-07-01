@@ -3,14 +3,22 @@ package trainning.osms.presentation;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
+import org.springframework.web.context.WebApplicationContext;
+
 import trainning.osms.business.BusinessException;
 import trainning.osms.business.Product;
 import trainning.osms.business.ProductController;
 
-@ManagedBean
+@Component
+@Scope(WebApplicationContext.SCOPE_REQUEST)
 public class NewProduct {
 	
 	private Product product;
+	private @Autowired ProductController controller;
 	
 	public NewProduct() {
 		product = new Product();
@@ -28,7 +36,6 @@ public class NewProduct {
 		FacesMessage message = new FacesMessage();
 		
 		try{
-			ProductController controller = new ProductController();
 			controller.saveProduct(product);
 			message.setSummary("Product successufully saved");
 			message.setSeverity(FacesMessage.SEVERITY_INFO);

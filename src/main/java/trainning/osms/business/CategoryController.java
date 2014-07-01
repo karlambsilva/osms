@@ -2,15 +2,16 @@ package trainning.osms.business;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
+
 import trainning.osms.persistence.CategoryDao;
 
+@Component
 public class CategoryController {
 	
-	private CategoryDao dao;
-	
-	public CategoryController() {
-		dao = new CategoryDao();
-	}
+	private @Autowired CategoryDao dao;
 	
 	public CategoryDao getDao() {
 		return dao;
@@ -20,6 +21,7 @@ public class CategoryController {
 		this.dao = dao;
 	}
 	
+	@Transactional
 	public void saveCategory(Category category) {
 		if(dao.containsCategory(category.getName())){
 			throw new BusinessException("There is a category named " + category.getName() + " already");
@@ -32,10 +34,12 @@ public class CategoryController {
 		return dao.searchCategory(options);
 	}
 	
+	@Transactional
 	public void deleteCategory(Category category) {
 		dao.deleteCategory(category);
 	}
 	
+	@Transactional
 	public void updateCategory(Category category) {
 		Category databaseCategory = dao.searchCategory(category.getName());
 		

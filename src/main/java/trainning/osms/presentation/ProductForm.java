@@ -3,7 +3,11 @@ package trainning.osms.presentation;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.faces.context.FacesContext;
 import javax.faces.view.facelets.Tag;
+
+import org.springframework.context.ApplicationContext;
+import org.springframework.web.jsf.FacesContextUtils;
 
 import trainning.osms.business.Category;
 import trainning.osms.business.CategoryController;
@@ -16,7 +20,10 @@ public class ProductForm {
 	private Product product;
 	
 	public ProductForm() {
-		CategoryController controller = new CategoryController();		
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		ApplicationContext applicationContext = FacesContextUtils.getWebApplicationContext(facesContext);
+		
+		CategoryController controller = applicationContext.getBean(CategoryController.class);
 		categories = controller.searchCategory(new CategorySearchOptions());
 		
 		

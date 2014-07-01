@@ -10,7 +10,7 @@ import trainning.osms.business.*;
 import trainning.osms.persistence.*;
 
 public class CategoryControllerTest {
-	
+	/*
 	@Test
 	public void insertHappyTest(){
 		Category category = new Category();
@@ -173,6 +173,6 @@ public class CategoryControllerTest {
 			
 		}
 		EasyMock.verify(dao);
-	}
+	}*/
 
 }

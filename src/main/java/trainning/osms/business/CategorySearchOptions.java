@@ -18,6 +18,7 @@ public class CategorySearchOptions {
 		}		
 	}
 	
+	private Integer id;
 	private String name;
 	private String description;
 	
@@ -76,6 +77,14 @@ public class CategorySearchOptions {
 
 	public void setMaxResults(Integer maxResults) {
 		this.maxResults = maxResults;
+	}
+	
+	public Integer getId() {
+		return id;
+	}
+	
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	@Override

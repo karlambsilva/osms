@@ -17,7 +17,7 @@ public class Product implements Cloneable{
 	private Integer id;
 	private String name;
 	private String description;
-	private double price;
+	private Double price;
 	private Category category;
 	private String image;
 
@@ -54,11 +54,11 @@ public class Product implements Cloneable{
 	}
 	
 	@Column(name="PRO_PRICE")
-	public double getPrice() {
+	public Double getPrice() {		
 		return price;
 	}
 	
-	public void setPrice(double price) {
+	public void setPrice(Double price) {
 		this.price = price;
 	}
 	

@@ -96,7 +96,7 @@ public class ProductSearchOptions {
 		this.maxResults = maxResults;
 	}
 
-	public Double getPrice() {
+	public Double getPrice() {		
 		return price;
 	}
 

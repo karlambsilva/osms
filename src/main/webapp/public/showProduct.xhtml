@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:bms="http://java.sun.com/jsf/composite/bms"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+	
+	<f:metadata>
+		<f:viewParam name="productId" value="#{showProduct.productId}"></f:viewParam>
+	</f:metadata>
+	
+	<h:head>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+		
+		<script src="/bms/lib/jquery.min.js"></script>
+		
+		<link href="/bms/lib/bootstrap-3.1.1-dist/css/bootstrap.min.css"
+			rel="stylesheet" />
+		<script src="/bms/lib/bootstrap-3.1.1-dist/js/bootstrap.min.js"></script>
+		
+		<link href="/bms/lib/datepicker/css/datepicker.css" rel="stylesheet" />
+		<script src="/bms/lib/datepicker/js/bootstrap-datepicker.js"></script>
+		
+		<title><ui:insert name="title"></ui:insert></title>
+	</h:head>
+	<body>
+		<div class="container" style="text-align:justify;">
+			<h1 class="page-header">
+				<a href="showCategory.xhtml?categoryId=#{showProduct.product.category.id}">				
+					#{showProduct.product.category.name}
+				</a>
+			</h1>
+			<h2>
+				#{showProduct.product.name}
+				#{showProduct.product.description}
+			</h2>
+			<h:outputText value="#{showProduct.getDescription()}" escape="false"></h:outputText>
+			
+		</div>
+		
+	</body>
+</html>

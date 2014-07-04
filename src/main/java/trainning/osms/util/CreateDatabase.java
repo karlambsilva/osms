@@ -96,7 +96,7 @@ public class CreateDatabase {
 				+ " Acompanha cinto fino de elástico igual ao da foto. Com cores sóbrias e padronagem delicada, esse "
 				+ "vestido pode ser combinado com acessórios alegres para looks casuais.");
 		pro_vestido_1.setImage("http://www.antixstore.com/Assets/Produtos/Gigantes/9133_vestido-corujitas_antix-store_baunilha_01_635332707782160642.jpg");
-		pro_vestido_1.setPrice(300);
+		pro_vestido_1.setPrice(300.0);
 		pro_vestido_1.setCategory(cat_mod_fem_vestidos);
 		manager.persist(pro_vestido_1);
 		transaction.commit();
@@ -112,7 +112,7 @@ public class CreateDatabase {
 				+ "acessórios para compor o look), esse vestido é um must have da estação, para ser usado em variadas "
 				+ "ocasiões. Acompanha cinto fininho de couro sintético e fivela delicada.");
 		pro_vestido_2.setImage("http://www.antixstore.com/Assets/Produtos/Gigantes/9135_vestido-sonho_antix-store_verde_01_635348999623329046.jpg");
-		pro_vestido_2.setPrice(250);
+		pro_vestido_2.setPrice(250.0);
 		pro_vestido_2.setCategory(cat_mod_fem_vestidos);
 		manager.persist(pro_vestido_2);
 		transaction.commit();

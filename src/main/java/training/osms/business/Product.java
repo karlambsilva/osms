@@ -1,4 +1,6 @@
-package trainning.osms.business;
+package training.osms.business;
+
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -6,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
@@ -20,6 +23,7 @@ public class Product implements Cloneable{
 	private Double price;
 	private Category category;
 	private String image;
+	private List <Order> orders;
 
 	
 	@Id
@@ -79,6 +83,15 @@ public class Product implements Cloneable{
 	
 	public void setImage(String image) {
 		this.image = image;
+	}
+	
+	@ManyToMany(mappedBy="products")
+	public List<Order> getOrders() {
+		return orders;
+	}
+	
+	public void setOrders(List<Order> orders) {
+		this.orders = orders;
 	}
 
 	@Override

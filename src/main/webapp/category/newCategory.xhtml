@@ -14,9 +14,9 @@
 		  	<h:form styleClass="form-horizontal" >
 				<h1>New Category</h1>
 							
-				<osms:category category="#{newCategory.category}">
+				<osms:category form="#{newCategory.form}">
 					<f:facet name="buttons">
-						<h:commandButton class="btn btn-primary" value="Save" action="#{newCategory.save}"/>
+						<h:commandButton class="btn btn-primary" value="Save" action="#{newCategory.saveCategory}"/>
 					</f:facet>
 				</osms:category>
 					

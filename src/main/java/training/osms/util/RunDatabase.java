@@ -1,4 +1,4 @@
-package trainning.osms.util;
+package training.osms.util;
 
 import org.h2.tools.Server;
 import java.io.IOException;

@@ -4,9 +4,10 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:composite="http://java.sun.com/jsf/composite"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
+	xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:f="http://java.sun.com/jsf/core">
 	<composite:interface>
-		<composite:attribute name="category"></composite:attribute>
+		<composite:attribute name="form"></composite:attribute>
 		<composite:attribute name="disabled" default="false"></composite:attribute>
 		<composite:facet name="buttons"></composite:facet>
 	</composite:interface>
@@ -14,9 +15,23 @@
 	<composite:implementation>
 	
 		<div class="form-group">
+    		<label class="col-sm-2 control-label">Parent Category</label>    			
+    		<div class="col-sm-10">
+    			<h:selectOneMenu styleClass="form-control"
+    							 value="#{cc.attrs.form.parentCategoryId}" disabled="#{cc.attrs.disabled}">
+    				<f:selectItems value="#{cc.attrs.form.categories}"
+    							   var="category"
+    							   itemLabel="#{category.name}"
+    							   itemValue="#{category.id}">
+    				</f:selectItems>
+    			</h:selectOneMenu>
+    		</div>
+  		</div>
+	
+		<div class="form-group">
 		    <label class="col-sm-2 control-label">Name</label>
 		    <div class="col-sm-10">
-		    	<h:inputText id="name" styleClass="form-control" value="#{cc.attrs.category.name}" disabled="#{cc.attrs.disabled}" p:placeholder="Name"></h:inputText>
+		    	<h:inputText id="name" styleClass="form-control" value="#{cc.attrs.form.category.name}" disabled="#{cc.attrs.disabled}" p:placeholder="Name"></h:inputText>
 		    </div>
 	  	</div>
 	  	
@@ -24,7 +39,7 @@
 	  	<div class="form-group">
 		    <label class="col-sm-2 control-label">Description</label>
 		    <div class="col-sm-10">
-		    	<h:inputTextarea styleClass="form-control" rows="10" value="#{cc.attrs.category.description}" disabled="#{cc.attrs.disabled}" p:placeholder="Description"></h:inputTextarea>
+		    	<h:inputTextarea styleClass="form-control" rows="10" value="#{cc.attrs.form.category.description}" disabled="#{cc.attrs.disabled}" p:placeholder="Description"></h:inputTextarea>
 		    </div>
 	  	</div>
 	  	

@@ -14,9 +14,9 @@
 		  	<h:form styleClass="form-horizontal" >
 				<h1>New Product</h1>
 							
-				<osms:product product="#{newProduct.product}">
+				<osms:product form="#{newProduct.form}">
 					<f:facet name="buttons">
-						<h:commandButton class="btn btn-primary" value="Save" action="#{newProduct.save}"/>
+						<h:commandButton class="btn btn-primary" value="Save" action="#{newProduct.saveProduct}"/>
 					</f:facet>
 				</osms:product>
 					

@@ -14,7 +14,7 @@
 		  	<h:form styleClass="form-horizontal" >
 				<h1>Delete Product</h1>
 							
-				<osms:product product="#{searchProduct.form.product}" disabled="true">
+				<osms:product form="#{searchProduct.form}" disabled="true">
 					<f:facet name="buttons">
 						<h:commandButton class="btn btn-primary" value="Delete" disabled="#{searchProduct.productDeleted}" action="#{searchProduct.confirmDeletion}"></h:commandButton>
 						<h:button class="btn" value="Back" outcome="searchProduct"></h:button>

@@ -14,7 +14,7 @@
 		  	<h:form styleClass="form-horizontal" >
 				<h1>Update Product</h1>
 							
-				<osms:product product="#{searchProduct.form.product}">
+				<osms:product form="#{searchProduct.form}">
 					<f:facet name="buttons">
 						<h:commandButton class="btn btn-primary" value="Save" action="#{searchProduct.confirmUpdate}"/>
 						<h:button class="btn" value="Back" outcome="searchProduct"></h:button>

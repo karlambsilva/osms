@@ -1,4 +1,4 @@
-package trainning.osms.persistence;
+package training.osms.persistence;
 
 import java.util.List;
 
@@ -10,8 +10,8 @@ import javax.persistence.TypedQuery;
 
 import org.springframework.stereotype.Component;
 
-import trainning.osms.business.Category;
-import trainning.osms.business.CategorySearchOptions;
+import training.osms.business.Category;
+import training.osms.business.CategorySearchOptions;
 
 @Component
 public class CategoryDao {	
@@ -19,26 +19,62 @@ public class CategoryDao {
 	private @PersistenceContext EntityManager manager;
 	
 	public boolean containsCategory(String categoryName){
-		return searchCategory(categoryName) != null; // esse search retorna null (não existem categorias com o criterio passado) ou 1 categoria. 
+		return searchCategory(categoryName) != null; // esse search retorna null (n???o existem categorias com o criterio passado) ou 1 categoria. 
 	}
 	
 	public void insertCategory(Category category){		
-		manager.persist(category); //método do jpql para fazer a inserção no banco
+		manager.persist(category); //m???todo do jpql para fazer a inser??????o no banco
 	}
 	
 	public Category searchCategory(String categoryName){
 		
 		TypedQuery<Category> query = manager.createQuery(
-				"SELECT category FROM trainning.osms.business.Category category WHERE UPPER(category.name) = :categoryName", 
+				"SELECT category FROM training.osms.business.Category category WHERE UPPER(category.name) = :categoryName", 
 				Category.class);
 		query.setParameter("categoryName", categoryName.toUpperCase());
 		List<Category> result = query.getResultList();
 		
 		if (result.isEmpty()){
-			return null; //se a lista estiver vazia significa que não existe nenhuma cat no banco com o nome desejado.
+			return null; //se a lista estiver vazia significa que n???o existe nenhuma cat no banco com o nome desejado.
 		}else{
 			return result.get(0); // se existir, pego ela.
 		}
+	}
+	
+	public List<Category> searchParentCategory(CategorySearchOptions options) {
+		
+		StringBuilder predicate = new StringBuilder();
+		
+		if(options.getId() != null){
+			predicate.append("category.id not in :categoryId");
+		}
+
+		if(options.getOrder() != null){
+			predicate.append(" order by category.");
+			predicate.append(options.getOrder().getValue());
+			if(options.isDesc()){
+				predicate.append(" desc");
+			}
+		}		
+		
+		TypedQuery<Category> query = manager.createQuery(
+				"SELECT category FROM training.osms.business.Category category where " + predicate, 
+				Category.class);
+		
+		
+		if(options.getId() != null){
+			query.setParameter("categoryId", options.getId());
+		}
+		if (options.getStartPosition() != null){
+			query.setFirstResult(options.getStartPosition());
+		}			
+		if (options.getMaxResults() != null){
+			query.setMaxResults(options.getMaxResults());
+		}			
+		
+		List<Category> result = query.getResultList();
+		
+		return result;
 	}
 
 	public List<Category> searchCategory(CategorySearchOptions options) {
@@ -54,7 +90,7 @@ public class CategoryDao {
 		}		
 		
 		TypedQuery<Category> query = manager.createQuery(
-				"SELECT category FROM trainning.osms.business.Category category where " + predicate, 
+				"SELECT category FROM training.osms.business.Category category where " + predicate, 
 				Category.class);
 		
 		
@@ -77,7 +113,7 @@ public class CategoryDao {
 		StringBuilder predicate = toPredicate(options);			
 		
 		TypedQuery<Long> query = manager.createQuery(
-				"SELECT count(category) FROM trainning.osms.business.Category category where " + predicate, 
+				"SELECT count(category) FROM training.osms.business.Category category where " + predicate, 
 				Long.class);		
 
 		setParameters(options, query);
@@ -89,7 +125,7 @@ public class CategoryDao {
 	}
 	
 	private StringBuilder toPredicate(CategorySearchOptions options) {
-		StringBuilder predicate = new StringBuilder("1 = 1"); // só para a concatenação funcionar perfeitamente por causa dos ands
+		StringBuilder predicate = new StringBuilder("1 = 1"); // s??? para a concatena??????o funcionar perfeitamente por causa dos ands
 		
 		if(options.getName() != null && options.getName().length() > 0){
 			predicate.append(" and upper(category.name) like :categoryName");
@@ -113,7 +149,7 @@ public class CategoryDao {
 	
 	public void deleteCategory(Category category) {		
 		Category managedCategory = manager.find(Category.class, category.getId()); // encontra a categoria que tem o id informado
-		manager.remove(managedCategory); // o manager só consegue deletar os items q ele conhece.. por isso q preciso procurar pela categoria	
+		manager.remove(managedCategory); // o manager s??? consegue deletar os items q ele conhece.. por isso q preciso procurar pela categoria	
 	}
 	
 	public void updateCategory(Category category) {

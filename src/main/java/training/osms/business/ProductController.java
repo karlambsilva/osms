@@ -1,4 +1,4 @@
-package trainning.osms.business;
+package training.osms.business;
 
 import java.util.List;
 
@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import trainning.osms.persistence.ProductDao;
+import training.osms.persistence.ProductDao;
 
 @Component
 public class ProductController {

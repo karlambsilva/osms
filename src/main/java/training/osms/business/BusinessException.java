@@ -1,4 +1,4 @@
-package trainning.osms.business;
+package training.osms.business;
 
 public class BusinessException extends RuntimeException{
 	

@@ -1,4 +1,4 @@
-package trainning.osms.presentation;
+package training.osms.presentation;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,25 +9,25 @@ import javax.faces.view.facelets.Tag;
 import org.springframework.context.ApplicationContext;
 import org.springframework.web.jsf.FacesContextUtils;
 
-import trainning.osms.business.Category;
-import trainning.osms.business.CategoryController;
-import trainning.osms.business.CategorySearchOptions;
-import trainning.osms.business.Product;
+import training.osms.business.Category;
+import training.osms.business.CategoryController;
+import training.osms.business.CategorySearchOptions;
+import training.osms.business.Product;
 
-public class ProductForm {
+public class CategoryForm {
 
 	private List <Category> categories;
-	private Product product;
+	private Category category;
 	
-	public ProductForm() {
+	public CategoryForm() {
 		FacesContext facesContext = FacesContext.getCurrentInstance();
 		ApplicationContext applicationContext = FacesContextUtils.getWebApplicationContext(facesContext);
 		
 		CategoryController controller = applicationContext.getBean(CategoryController.class);
 		categories = controller.searchCategory(new CategorySearchOptions());
+		category = new Category();
 		
 		
-		product = new Product();
 	}
 	
 	public List<Category> getCategories() {
@@ -38,34 +38,34 @@ public class ProductForm {
 		this.categories = categories;
 	}
 	
-	public Product getProduct() {
-		return product;
+	public Category getCategory() {
+		return category;
 	}
 	
-	public void setProduct(Product product) {
-		this.product = product;
+	public void setCategory(Category category) {
+		this.category = category;
 	}
 	
-	public void setCategoryId(Integer categoryId){
-		if (categoryId == null){
-			product.setCategory(null);
+	public void setParentCategoryId(Integer parentCategoryId){
+		if (parentCategoryId == null){
+			category.setParentCategory(null);
 		}else{
-			for(Category category : categories){
-				if (category.getId().equals(categoryId)){
-					product.setCategory(category);
+			for(Category parentCategory : categories){
+				if (parentCategory.getId().equals(parentCategoryId)){
+					category.setParentCategory(parentCategory);
 					break;
 				}
 			}
 		}
 	}
 	
-	public Integer getCategoryId() {
-		Category category = product.getCategory();
+	public Integer getParentCategoryId() {
+		Category parentCategory = category.getParentCategory();
 		
-		if(category==null){
+		if(parentCategory==null){
 			return null;
 		}else{
-			return category.getId();
+			return parentCategory.getId();
 		}
 	}
 	

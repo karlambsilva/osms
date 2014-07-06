@@ -1,4 +1,4 @@
-package trainning.osms.business;
+package training.osms.business;
 
 import java.util.ArrayList;
 import java.util.List;

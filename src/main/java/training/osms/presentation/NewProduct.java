@@ -1,4 +1,4 @@
-package trainning.osms.presentation;
+package training.osms.presentation;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -9,35 +9,35 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.WebApplicationContext;
 
-import trainning.osms.business.BusinessException;
-import trainning.osms.business.Product;
-import trainning.osms.business.ProductController;
+import training.osms.business.BusinessException;
+import training.osms.business.Product;
+import training.osms.business.ProductController;
 
 @Component
 @Scope(WebApplicationContext.SCOPE_REQUEST)
 public class NewProduct {
 	
-	private Product product;
+	private ProductForm form;
 	private @Autowired ProductController controller;
 	
 	public NewProduct() {
-		product = new Product();
+		form = new ProductForm();
 	}
 	
-	public Product getProduct() {
-		return product;
+	public ProductForm getForm() {
+		return form;
 	}
 	
-	public void setProduct(Product category) {
-		this.product = category;
+	public void setForm(ProductForm form) {
+		this.form = form;
 	}
 	
-	public void save(){				
+	public void saveProduct(){				
 		FacesMessage message = new FacesMessage();
 		
 		try{
-			controller.saveProduct(product);
-			message.setSummary("Product successufully saved");
+			controller.saveProduct(form.getProduct());
+			message.setSummary("Product was successufully saved");
 			message.setSeverity(FacesMessage.SEVERITY_INFO);
 		}catch(BusinessException e){
 			message.setSummary(e.getMessage());

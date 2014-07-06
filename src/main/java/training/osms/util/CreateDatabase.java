@@ -1,12 +1,12 @@
-package trainning.osms.util;
+package training.osms.util;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 
-import trainning.osms.business.Category;
-import trainning.osms.business.Product;
+import training.osms.business.Category;
+import training.osms.business.Product;
 
 public class CreateDatabase {
 	
@@ -91,10 +91,10 @@ public class CreateDatabase {
 		transaction.begin();
 		Product pro_vestido_1 = new Product();
 		pro_vestido_1.setName("Vestido Longo Corujitas");
-		pro_vestido_1.setDescription("Tecido: Viscose \n Composição: 100% Viscose - Forro: 100% Poliéster" +
-				"\nDetalhes: Vestido longo de modelagem solta e tecido leve, com alças ajustáveis e zíper nas costas."
-				+ " Acompanha cinto fino de elástico igual ao da foto. Com cores sóbrias e padronagem delicada, esse "
-				+ "vestido pode ser combinado com acessórios alegres para looks casuais.");
+		pro_vestido_1.setDescription("Tecido: Viscose \n Composi????o: 100% Viscose - Forro: 100% Poli??ster" +
+				"\nDetalhes: Vestido longo de modelagem solta e tecido leve, com al??as ajust??veis e z??per nas costas."
+				+ " Acompanha cinto fino de el??stico igual ao da foto. Com cores s??brias e padronagem delicada, esse "
+				+ "vestido pode ser combinado com acess??rios alegres para looks casuais.");
 		pro_vestido_1.setImage("http://www.antixstore.com/Assets/Produtos/Gigantes/9133_vestido-corujitas_antix-store_baunilha_01_635332707782160642.jpg");
 		pro_vestido_1.setPrice(300.0);
 		pro_vestido_1.setCategory(cat_mod_fem_vestidos);
@@ -105,12 +105,12 @@ public class CreateDatabase {
 		transaction.begin();
 		Product pro_vestido_2 = new Product();
 		pro_vestido_2.setName("Vestido Sonho");
-		pro_vestido_2.setDescription("Tecido: Viscose \n Composição: 100% Viscose - Forro: 100% Poliéster" +
-				"\nDetalhes: Vestido de tecido plano estampado, acinturado e com zíper nas costas. Possui um recorte "
-				+ "de tecido liso de cor contrastante e detalhes rendados nas mangas. Com cores neutras e fáceis de "
-				+ "combinar com diversos acessórios (dica: explore as cores presentes na estampa na escolha dos "
-				+ "acessórios para compor o look), esse vestido é um must have da estação, para ser usado em variadas "
-				+ "ocasiões. Acompanha cinto fininho de couro sintético e fivela delicada.");
+		pro_vestido_2.setDescription("Tecido: Viscose \n Composi????o: 100% Viscose - Forro: 100% Poli??ster" +
+				"\nDetalhes: Vestido de tecido plano estampado, acinturado e com z??per nas costas. Possui um recorte "
+				+ "de tecido liso de cor contrastante e detalhes rendados nas mangas. Com cores neutras e f??ceis de "
+				+ "combinar com diversos acess??rios (dica: explore as cores presentes na estampa na escolha dos "
+				+ "acess??rios para compor o look), esse vestido ?? um must have da esta????o, para ser usado em variadas "
+				+ "ocasi??es. Acompanha cinto fininho de couro sint??tico e fivela delicada.");
 		pro_vestido_2.setImage("http://www.antixstore.com/Assets/Produtos/Gigantes/9135_vestido-sonho_antix-store_verde_01_635348999623329046.jpg");
 		pro_vestido_2.setPrice(250.0);
 		pro_vestido_2.setCategory(cat_mod_fem_vestidos);

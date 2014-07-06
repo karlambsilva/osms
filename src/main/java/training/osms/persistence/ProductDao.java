@@ -1,4 +1,4 @@
-package trainning.osms.persistence;
+package training.osms.persistence;
 
 import java.util.List;
 
@@ -10,9 +10,9 @@ import javax.persistence.TypedQuery;
 
 import org.springframework.stereotype.Component;
 
-import trainning.osms.business.Category;
-import trainning.osms.business.Product;
-import trainning.osms.business.ProductSearchOptions;
+import training.osms.business.Category;
+import training.osms.business.Product;
+import training.osms.business.ProductSearchOptions;
 
 @Component
 public class ProductDao {
@@ -29,12 +29,12 @@ public class ProductDao {
 
 	public void deleteProduct(Product product) {
 		Product managedProduct = manager.find(Product.class, product.getId()); 
-		manager.remove(managedProduct); // o manager só consegue deletar os items q ele conhece.. por isso q preciso procurar pela categoria	
+		manager.remove(managedProduct); // o manager s? consegue deletar os items q ele conhece.. por isso q preciso procurar pela categoria	
 	}	
 	
 	public Product searchProduct(String productName) {
 		TypedQuery<Product> query = manager.createQuery(
-				"SELECT product FROM trainning.osms.business.Product product WHERE UPPER(product.name) = :productName", 
+				"SELECT product FROM training.osms.business.Product product WHERE UPPER(product.name) = :productName", 
 				Product.class);
 		query.setParameter("productName", productName.toUpperCase());
 		List<Product> result = query.getResultList();
@@ -59,7 +59,7 @@ public class ProductDao {
 		}		
 		
 		TypedQuery<Product> query = manager.createQuery(
-				"SELECT product FROM trainning.osms.business.Product product where " + predicate, 
+				"SELECT product FROM training.osms.business.Product product where " + predicate, 
 				Product.class);		
 
 		setParameters(options, query);
@@ -80,7 +80,7 @@ public class ProductDao {
 		StringBuilder predicate = toPredicate(options);			
 		
 		TypedQuery<Long> query = manager.createQuery(
-				"SELECT count(product) FROM trainning.osms.business.Product product where " + predicate, 
+				"SELECT count(product) FROM training.osms.business.Product product where " + predicate, 
 				Long.class);		
 
 		setParameters(options, query);

@@ -1,4 +1,4 @@
-package trainning.osms.test;
+package training.osms.test;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,8 +6,9 @@ import java.util.List;
 import org.easymock.EasyMock;
 import org.junit.Assert;
 import org.junit.Test;
-import trainning.osms.business.*;
-import trainning.osms.persistence.*;
+
+import training.osms.business.*;
+import training.osms.persistence.*;
 
 public class CategoryControllerTest {
 	/*
@@ -18,7 +19,7 @@ public class CategoryControllerTest {
 		category.setDescription("Eveything about technology you can find here.");
 		
 		CategoryDao dao = EasyMock.createMock(CategoryDao.class);
-		EasyMock.expect(dao.containsCategory("Technology")).andReturn(false); // se n��o cont��m, insert
+		EasyMock.expect(dao.containsCategory("Technology")).andReturn(false); // se n??????o cont??????m, insert
 		
 		dao.insertCategory(category);
 		EasyMock.replay(dao);
@@ -39,18 +40,18 @@ public class CategoryControllerTest {
 		CategoryDao dao = EasyMock.createMock(CategoryDao.class);
 		EasyMock.expect(dao.containsCategory("Technology")).andReturn(true);
 		
-		//dao.insertCategory(category); n��o vai ser chamado pelo controlodor pq j�� existe um categoria de nome "Technology"
+		//dao.insertCategory(category); n??????o vai ser chamado pelo controlodor pq j?????? existe um categoria de nome "Technology"
 		EasyMock.replay(dao);
 		
 		CategoryController controller = new CategoryController();
 		controller.setDao(dao);
 		
 		
-		// se eu chamar o m��todo e ele n��o levanta uma exce����o.. eu fa��o o teste falhar com o "Assert.fail"
+		// se eu chamar o m??????todo e ele n??????o levanta uma exce????????????o.. eu fa??????o o teste falhar com o "Assert.fail"
 		
 		try{
-			controller.saveCategory(category); //envolvo linha que deve levantar exce����o
-			Assert.fail("Exce����o n��o levantada"); //caso n��o levante.. por padr��o, ele continua o codigo para o proxima linha.. mas faco o teste falhar
+			controller.saveCategory(category); //envolvo linha que deve levantar exce????????????o
+			Assert.fail("Exce????????????o n??????o levantada"); //caso n??????o levante.. por padr??????o, ele continua o codigo para o proxima linha.. mas faco o teste falhar
 		}catch(BusinessException e){
 			
 		}
@@ -119,7 +120,7 @@ public class CategoryControllerTest {
 	
 	@Test
 	public void updateHappyTestSameIds(){
-		// j�� existe uma categoria no bd com o mesmo nome, por��m o id eh o mesmo do que estou atualizando.
+		// j?????? existe uma categoria no bd com o mesmo nome, por??????m o id eh o mesmo do que estou atualizando.
 		
 		Category category = new Category();
 		category.setId(1);
@@ -160,15 +161,15 @@ public class CategoryControllerTest {
 		
 		CategoryDao dao = EasyMock.createMock(CategoryDao.class);
 		EasyMock.expect(dao.searchCategory("Technology")).andReturn(databaseCategory);
-		//dao.updateCategory(category);  n��o espero que o update seja chamado pq eu n��o vou atualizar.
+		//dao.updateCategory(category);  n??????o espero que o update seja chamado pq eu n??????o vou atualizar.
 		EasyMock.replay(dao);
 		
 		CategoryController controller = new CategoryController();
 		controller.setDao(dao);
 		
 		try{
-			controller.updateCategory(category); //envolvo linha que deve levantar exce����o
-			Assert.fail("Exce����o n��o levantada"); //caso n��o levante.. por padr��o, ele continua o codigo para o proxima linha.. mas faco o teste falhar
+			controller.updateCategory(category); //envolvo linha que deve levantar exce????????????o
+			Assert.fail("Exce????????????o n??????o levantada"); //caso n??????o levante.. por padr??????o, ele continua o codigo para o proxima linha.. mas faco o teste falhar
 		}catch(BusinessException e){
 			
 		}

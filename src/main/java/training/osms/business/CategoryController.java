@@ -1,4 +1,4 @@
-package trainning.osms.business;
+package training.osms.business;
 
 import java.util.List;
 
@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import trainning.osms.persistence.CategoryDao;
+import training.osms.persistence.CategoryDao;
 
 @Component
 public class CategoryController {
@@ -56,6 +56,10 @@ public class CategoryController {
 
 	public Integer searchCategoryCount(CategorySearchOptions options) {
 		return dao.searchCategoryCount(options);
+	}
+	
+	public List<Category> searchParentCategory(CategorySearchOptions options) {
+		return dao.searchParentCategory(options);
 	}
 
 }

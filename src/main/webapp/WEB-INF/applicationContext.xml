@@ -10,7 +10,7 @@
          				   http://www.springframework.org/schema/context/spring-context.xsd
          				   http://www.springframework.org/schema/tx
        					   http://www.springframework.org/schema/tx/spring-tx.xsd">
-	<context:component-scan base-package="trainning.osms"></context:component-scan>
+	<context:component-scan base-package="training.osms"></context:component-scan>
 	
 	<tx:annotation-driven transaction-manager="transactionManager"/>
 
@@ -26,6 +26,6 @@
 		<property name="driverClass" value="org.h2.Driver"/>
 		<property name="jdbcUrl" value="jdbc:h2:tcp://localhost/~/osms"/>
    		<property name="username" value="sa"/>
-   		<property name="password" value=""/>   		   		
+   		<property name="password" value="2010@abc"/>   		   		
 	</bean>		
 </beans>

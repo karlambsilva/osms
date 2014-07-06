@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="ISO-8859-1" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:bms="http://java.sun.com/jsf/composite/bms"
+	xmlns:osms="http://java.sun.com/jsf/composite/osms"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
@@ -21,9 +21,6 @@
 			rel="stylesheet" />
 		<script src="/bms/lib/bootstrap-3.1.1-dist/js/bootstrap.min.js"></script>
 		
-		<link href="/bms/lib/datepicker/css/datepicker.css" rel="stylesheet" />
-		<script src="/bms/lib/datepicker/js/bootstrap-datepicker.js"></script>
-		
 		<title><ui:insert name="title"></ui:insert></title>
 	</h:head>
 	<body>
@@ -37,7 +34,7 @@
 				#{showProduct.product.name}
 				#{showProduct.product.description}
 			</h2>
-			<h:outputText value="#{showProduct.getDescription()}" escape="false"></h:outputText>
+			<h:outputText value="#{showProduct.product.getDescription()}" escape="false"></h:outputText>
 			
 		</div>
 		

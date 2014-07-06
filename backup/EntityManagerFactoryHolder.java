@@ -1,4 +1,4 @@
-package trainning.osms.persistence;
+package training.osms.persistence;
 
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;

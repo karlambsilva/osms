@@ -1,4 +1,4 @@
-package trainning.osms.presentation;
+package training.osms.presentation;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,10 +11,10 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.WebApplicationContext;
 
-import trainning.osms.business.BusinessException;
-import trainning.osms.business.Product;
-import trainning.osms.business.ProductController;
-import trainning.osms.business.ProductSearchOptions;
+import training.osms.business.BusinessException;
+import training.osms.business.Product;
+import training.osms.business.ProductController;
+import training.osms.business.ProductSearchOptions;
 
 @Component
 @Scope(WebApplicationContext.SCOPE_SESSION)

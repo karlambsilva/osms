@@ -14,7 +14,7 @@
 		  	<h:form styleClass="form-horizontal" >
 				<h1>Update Category</h1>
 							
-				<osms:category category="#{searchCategory.category}">
+				<osms:category form="#{searchCategory.form}">
 					<f:facet name="buttons">
 						<h:commandButton class="btn btn-primary" value="Save" action="#{searchCategory.confirmUpdate}"/>
 						<h:button class="btn btn-primary" value="Back" outcome="searchCategory"/>

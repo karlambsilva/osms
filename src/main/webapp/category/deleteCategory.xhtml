@@ -14,7 +14,7 @@
 		  	<h:form styleClass="form-horizontal" >
 				<h1>Update Category</h1>
 							
-				<osms:category category="#{searchCategory.category}" disabled="true">
+				<osms:category form="#{searchCategory.form}" disabled="true">
 					<f:facet name="buttons">
 						<h:commandButton class="btn btn-primary" value="Delete" disabled="#{searchCategory.categoryDeleted}" action="#{searchCategory.confirmDeletion}"/>
 						<h:button class="btn btn-primary" value="Back" outcome="searchCategory"/>

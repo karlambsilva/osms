@@ -1,4 +1,4 @@
-package trainning.osms.presentation;
+package training.osms.presentation;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +13,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.WebApplicationContext;
 
-import trainning.osms.business.*;
+import training.osms.business.*;
 
 @Component
 @Scope(WebApplicationContext.SCOPE_SESSION)
@@ -22,7 +22,7 @@ public class SearchCategory {
 	private static final int RESULTS_PER_PAGE = 2;
 	private List<Category> result;
 	private CategorySearchOptions options;
-	private Category category;
+	private CategoryForm form;
 	private boolean categoryDeleted;
 	private List<Integer> pages;
 	private int page;
@@ -54,12 +54,12 @@ public class SearchCategory {
 		this.options = options;
 	}
 	
-	public Category getCategory() {
-		return category;
+	public CategoryForm getForm() {
+		return form;
 	}
 	
-	public void setCategory(Category category) {
-		this.category = category;
+	public void setForm(CategoryForm form) {
+		this.form = form;
 	}
 	
 	public boolean isCategoryDeleted() {
@@ -123,7 +123,13 @@ public class SearchCategory {
 		Category categAux = new Category();
 		categAux = category.clone();
 		
-		this.category = categAux; 
+		this.form = new CategoryForm();
+		this.form.setCategory(categAux);
+		
+		CategorySearchOptions options = new CategorySearchOptions();
+		options.setId(form.getCategory().getId());
+		
+		form.setCategories(controller.searchParentCategory(options));
 		
 		return "updateCategory"; //outcome definido no faces-config.xml
 	}
@@ -133,7 +139,7 @@ public class SearchCategory {
 		FacesMessage message = new FacesMessage();
 		
 		try{
-			controller.updateCategory(category);
+			controller.updateCategory(form.getCategory());
 			reset();
 			message.setSummary("Category successufully saved");
 			message.setSeverity(FacesMessage.SEVERITY_INFO);
@@ -148,14 +154,15 @@ public class SearchCategory {
 	
 	
 	public String delete(Category category){
-		this.category = category;
+		this.form = new CategoryForm();
+		this.form.setCategory(category);
 		this.categoryDeleted = false;
 		return "deleteCategory";
 	}
 	
 	public void confirmDeletion(){
-		controller.deleteCategory(category);
-		this.categoryDeleted = true; // disable delete button. evita do usuário tentar deletar a mesma coisa 2x
+		controller.deleteCategory(form.getCategory());
+		this.categoryDeleted = true; // disable delete button. evita do usu???rio tentar deletar a mesma coisa 2x
 		reset();
 		
 		FacesMessage message = new FacesMessage();

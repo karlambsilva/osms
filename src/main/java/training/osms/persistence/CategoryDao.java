@@ -77,7 +77,7 @@ public class CategoryDao {
 		return result;
 	}
 	
-	public List<Category> getSubCategories(CategorySearchOptions options) {
+	public List<Category> searchSubCategories(CategorySearchOptions options) {
 		
 		StringBuilder predicate = new StringBuilder();
 		

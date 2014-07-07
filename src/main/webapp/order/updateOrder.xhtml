@@ -8,18 +8,18 @@
 	  
 	<ui:composition template="/template.xhtml">  
 		<ui:define name="title">
-			Update Category
+			Update Order
 		</ui:define>
 		<ui:define name="content">
 		  	<h:form styleClass="form-horizontal" >
-				<h1>Update Category</h1>
+				<h1>Update Order</h1>
 							
-				<osms:category form="#{searchCategory.form}">
+				<osms:order form="#{searchOrder.form}">
 					<f:facet name="buttons">
-						<h:commandButton class="btn btn-primary" value="Save" action="#{searchCategory.confirmUpdate}"/>
-						<h:button class="btn btn-primary" value="Back" outcome="searchCategory"/>
+						<h:commandButton class="btn btn-primary" value="Save" action="#{searchOrder.confirmUpdate}"/>
+						<h:button class="btn btn-primary" value="Back" outcome="searchOrder"/>
 					</f:facet>
-				</osms:category>
+				</osms:order>
 				<h:messages/>
 			</h:form>
 	  	</ui:define>

@@ -14,12 +14,16 @@
 	
 	<composite:implementation>
 	
-		<div class="form-group">
-		    <label class="col-sm-2 control-label">Order Number</label>
-		    <div class="col-sm-10">
-		    	<h:inputText id="name" styleClass="form-control" value="#{cc.attrs.form.order.orderNumber}" disabled="#{cc.attrs.disabled}" p:placeholder="Order Number"></h:inputText>
-		    </div>
-	  	</div>
+	  	<div class="form-group">
+    		<label class="col-sm-2 control-label">Products</label>
+    		<div class="col-sm-10">
+				<!-- Button trigger modal -->
+				<button class="btn btn-primary" data-toggle="modal" data-target="#myModal"
+					    onclick="return false;">
+					View
+				</button>
+    		</div>
+  		</div>
 	  	
 	  	<div class="form-group">
 			<div class="col-sm-offset-2 col-sm-10">
@@ -28,6 +32,31 @@
 				</div>
 			</div>
 		</div>
+	  	
+	  	<!-- Modal -->
+		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		  <div class="modal-dialog">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+		        <h4 class="modal-title" id="myModalLabel">Products</h4>
+		      </div>
+		      <div class="modal-body" style="max-height: 300px; overflow: auto;">
+		   			<h:selectManyCheckbox value="#{cc.attrs.form.productIds}"
+		   								  layout="pageDirection">
+		   				<f:selectItems value="#{cc.attrs.form.products}"
+		   							   var="product"
+		   							   itemLabel="#{product.name}"
+		   							   itemValue="#{product.id}">
+		   				</f:selectItems>
+		   			</h:selectManyCheckbox>	
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+		      </div>
+		    </div>
+		  </div>
+		</div>		
 	  	
 	</composite:implementation>
 </html>

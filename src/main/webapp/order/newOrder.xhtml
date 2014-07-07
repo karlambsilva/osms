@@ -8,17 +8,17 @@
 	  
 	<ui:composition template="/template.xhtml">  
 		<ui:define name="title">
-			New Category
+			New Order
 		</ui:define>
 		<ui:define name="content">
 		  	<h:form styleClass="form-horizontal" >
-				<h1>New Category</h1>
+				<h1>New Order</h1>
 							
-				<osms:category form="#{newCategory.form}">
+				<osms:order form="#{newOrder.form}">
 					<f:facet name="buttons">
-						<h:commandButton class="btn btn-primary" value="Save" action="#{newCategory.saveCategory}"/>
+						<h:commandButton class="btn btn-primary" value="Save" action="#{newOrder.saveOrder}"/>
 					</f:facet>
-				</osms:category>
+				</osms:order>
 					
 				<h:messages/>
 			</h:form>

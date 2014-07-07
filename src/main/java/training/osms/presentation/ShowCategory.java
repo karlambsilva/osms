@@ -22,6 +22,7 @@ public class ShowCategory {
 	private Category category;
 	private int categoryId;
 	private List<Product> products;
+	private List<Category> subCategories;
 	private @Autowired CategoryController controller;
 	private @Autowired ProductController productController;
 	
@@ -64,6 +65,19 @@ public class ShowCategory {
 	
 	public void setProducts(List<Product> products) {
 		this.products = products;
+	}
+	
+	public List<Category> getSubCategories() {
+		CategorySearchOptions options = new CategorySearchOptions();
+		options.setId(categoryId);
+		
+		subCategories = controller.searchSubCategories(options);
+		
+		return subCategories;
+	}
+	
+	public void setSubCategories(List<Category> subCategories) {
+		this.subCategories = subCategories;
 	}
 	
 }

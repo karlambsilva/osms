@@ -37,6 +37,8 @@ public class SearchProduct {
 	private void reset() {
 		options = new ProductSearchOptions();
 		result = null;
+		pages = null;
+		page = 0;
 	}
 	
 	public List<Product> getResult() {

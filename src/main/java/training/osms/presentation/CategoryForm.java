@@ -80,8 +80,11 @@ public class CategoryForm {
 
 	public List<String> getCategoryIds() {
 		List<String> categoryIds = new ArrayList<>();
-		for (Category categ : category.getSubCategories()) {
-			categoryIds.add(categ.getId().toString());
+		
+		if (category.getSubCategories() != null){
+			for (Category categ : category.getSubCategories()) {
+				categoryIds.add(categ.getId().toString());
+			}
 		}
 		return categoryIds;
 	}

@@ -26,6 +26,6 @@
 		<property name="driverClass" value="org.h2.Driver"/>
 		<property name="jdbcUrl" value="jdbc:h2:tcp://localhost/~/osms"/>
    		<property name="username" value="sa"/>
-   		<property name="password" value="2010@abc"/>   		   		
+   		<property name="password" value=""/>   		   		
 	</bean>		
 </beans>

@@ -62,8 +62,8 @@ public class CategoryController {
 		return dao.getPossibleParentCategories(options);
 	}
 	
-	public List<Category> getSubCategories(CategorySearchOptions options) {
-		return dao.getSubCategories(options);
+	public List<Category> searchSubCategories(CategorySearchOptions options) {
+		return dao.searchSubCategories(options);
 	}
 
 }

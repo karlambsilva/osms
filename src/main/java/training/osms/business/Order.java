@@ -20,7 +20,6 @@ import javax.persistence.TemporalType;
 public class Order {
 	
 	private Integer id;
-	private String orderNumber;
 	private List <Product> products;
 	private Date orderDate;
 	
@@ -35,20 +34,11 @@ public class Order {
 		this.id = id;
 	}
 	
-	@Column(name="ORD_ORDER_NUMBER")
-	public String getOrderNumber() {
-		return orderNumber;
-	}
-	
-	public void setOrderNumber(String orderNumber) {
-		this.orderNumber = orderNumber;
-	}
-	
 	@ManyToMany
 	@JoinTable(
 			name="ORP_ORDER_PRODUCT",
-			joinColumns=@JoinColumn(name="PRO_ID"),
-			inverseJoinColumns=@JoinColumn(name="ORD_ID")
+			joinColumns=@JoinColumn(name="ORD_ID"),
+			inverseJoinColumns=@JoinColumn(name="PRO_ID")
 		)
 	public List<Product> getProducts() {
 		return products;

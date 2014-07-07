@@ -5,7 +5,7 @@ import java.util.Date;
 public class OrderSearchOptions {
 	
 	public enum Order{
-		ORDER_NUMBER("orderNumber"),
+		ID("id"),
 		ORDER_DATE("orderDate");
 		
 		private String value;
@@ -21,8 +21,7 @@ public class OrderSearchOptions {
 	}
 	
 	private Integer id;
-	private String orderNumber;
-	private Date orderDate;
+	private String orderDate;
 	
 	private boolean desc;
 	private Order order;
@@ -30,7 +29,7 @@ public class OrderSearchOptions {
 	private Integer maxResults;
 	
 	public OrderSearchOptions() {
-		order = Order.ORDER_NUMBER;
+		order = Order.ID;
 	}
 
 	public Integer getId() {
@@ -41,19 +40,11 @@ public class OrderSearchOptions {
 		this.id = id;
 	}
 
-	public String getOrderNumber() {
-		return orderNumber;
-	}
-
-	public void setOrderNumber(String orderNumber) {
-		this.orderNumber = orderNumber;
-	}
-
-	public Date getOrderDate() {
+	public String getOrderDate() {
 		return orderDate;
 	}
 
-	public void setOrderDate(Date orderDate) {
+	public void setOrderDate(String orderDate) {
 		this.orderDate = orderDate;
 	}
 
@@ -88,10 +79,14 @@ public class OrderSearchOptions {
 	public void setMaxResults(Integer maxResults) {
 		this.maxResults = maxResults;
 	}
+	
+	public Date getToday(){
+		return new Date();
+	}
 
 	@Override
 	public String toString() {
-		return "OrderSearchOptions [order number=" + orderNumber + ", order date="
+		return "OrderSearchOptions [id=" + id + ", order date="
 				+ orderDate + "]";
 	}
 

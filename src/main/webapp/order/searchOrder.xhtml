@@ -23,15 +23,15 @@
 							 columnClasses="col-sm-5, col-sm-6" rendered="#{searchOrder.result.isEmpty() == false}">
 					<h:column>
 						<f:facet name="header">
-							Name
+							Order Number
 						</f:facet>
-						#{order.name}
+						#{order.id}
 					</h:column>
 					<h:column>
 						<f:facet name="header">
-							Description
+							Order Date
 						</f:facet>
-						#{order.description}
+						#{order.orderDate}
 					</h:column>
 					<h:column>
 						<div class="btn-toolbar">

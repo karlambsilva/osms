@@ -26,6 +26,17 @@
 	<body>
 		<div class="container">
 			<h1 class="page-header">#{showCategory.category.name}</h1>
+			#{showCategory.subCategories}
+			<ui:repeat var="category" value="#{showCategory.subCategories}">
+				<h2>
+					<a href="/osms/faces/public/showCategory.xhtml?categoryId=#{category.id}">
+						#{category.name}
+						#{category.description}
+					</a>		
+				</h2>
+			</ui:repeat>
+			
+			
 			<ui:repeat var="product" value="#{showCategory.products}">
 				<h2>
 					<a href="/osms/faces/public/showProduct.xhtml?productId=#{product.id}">

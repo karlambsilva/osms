@@ -56,5 +56,28 @@
 			<to-view-id>/product/searchProduct.xhtml</to-view-id>
 		</navigation-case>	
 	</navigation-rule>  
-			 
+		
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>updateOrder</from-outcome>
+			<to-view-id>/order/updateOrder.xhtml</to-view-id>
+		</navigation-case>	
+	</navigation-rule>    
+	
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>deleteOrder</from-outcome>
+			<to-view-id>/order/deleteOrder.xhtml</to-view-id>
+		</navigation-case>	
+	</navigation-rule>  
+	
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>searchOrder</from-outcome>
+			<to-view-id>/order/searchOrder.xhtml</to-view-id>
+		</navigation-case>	
+	</navigation-rule>	 
 </faces-config>

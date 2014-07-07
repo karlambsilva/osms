@@ -34,6 +34,8 @@ public class SearchCategory {
 	public void reset(){
 		options = new CategorySearchOptions();
 		result = null;
+		pages = null;
+		page = 0;
 	}
 	
 	public List<Category> getResult() {

@@ -26,8 +26,6 @@ public class CategoryForm {
 		CategoryController controller = applicationContext.getBean(CategoryController.class);
 		categories = controller.searchCategory(new CategorySearchOptions());
 		category = new Category();
-		
-		
 	}
 	
 	public List<Category> getCategories() {
@@ -67,6 +65,25 @@ public class CategoryForm {
 		}else{
 			return parentCategory.getId();
 		}
+	}
+	
+	public void setCategoryIds(List<String> categoryIds) {
+		category.getSubCategories().clear();
+		for (String categoryId : categoryIds) {
+			for (Category categ : categories) {
+				if (categ.getId().toString().equals(categoryId)) {
+					category.getSubCategories().add(categ);
+				}
+			}
+		}
+	}
+
+	public List<String> getCategoryIds() {
+		List<String> categoryIds = new ArrayList<>();
+		for (Category categ : category.getSubCategories()) {
+			categoryIds.add(categ.getId().toString());
+		}
+		return categoryIds;
 	}
 	
 }

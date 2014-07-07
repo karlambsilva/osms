@@ -14,12 +14,13 @@
 		  	<h:form styleClass="form-horizontal" >
 				<h1>Update Category</h1>
 							
-				<osms:category form="#{searchCategory.form}">
+				<osms:category form="#{searchCategory.form}" disabled="true">
 					<f:facet name="buttons">
-						<h:commandButton class="btn btn-primary" value="Save" action="#{searchCategory.confirmUpdate}"/>
+						<h:commandButton class="btn btn-primary" value="Delete" disabled="#{searchCategory.categoryDeleted}" action="#{searchCategory.confirmDeletion}"/>
 						<h:button class="btn btn-primary" value="Back" outcome="searchCategory"/>
 					</f:facet>
 				</osms:category>
+					
 				<h:messages/>
 			</h:form>
 	  	</ui:define>

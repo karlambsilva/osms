@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.faces.application.FacesMessage;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -120,16 +118,17 @@ public class SearchCategory {
 
 	public String update(Category category){
 		
-		Category categAux = new Category();
-		categAux = category.clone();
+		CategorySearchOptions options = new CategorySearchOptions();
+		options.setId(category.getId());
+		Category categAux = controller.searchCategory(options).get(0);
 		
 		this.form = new CategoryForm();
 		this.form.setCategory(categAux);
 		
-		CategorySearchOptions options = new CategorySearchOptions();
+		/*CategorySearchOptions options = new CategorySearchOptions();
 		options.setId(form.getCategory().getId());
 		
-		form.setCategories(controller.searchParentCategory(options));
+		form.setCategories(controller.getPossibleParentCategories(options));*/
 		
 		return "updateCategory"; //outcome definido no faces-config.xml
 	}
@@ -154,8 +153,13 @@ public class SearchCategory {
 	
 	
 	public String delete(Category category){
+		
+		CategorySearchOptions options = new CategorySearchOptions();
+		options.setId(category.getId());
+		Category categAux = controller.searchCategory(options).get(0);
+		
 		this.form = new CategoryForm();
-		this.form.setCategory(category);
+		this.form.setCategory(categAux);
 		this.categoryDeleted = false;
 		return "deleteCategory";
 	}

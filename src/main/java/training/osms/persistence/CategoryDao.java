@@ -41,7 +41,7 @@ public class CategoryDao {
 		}
 	}
 	
-	public List<Category> searchParentCategory(CategorySearchOptions options) {
+	public List<Category> getPossibleParentCategories(CategorySearchOptions options) {
 		
 		StringBuilder predicate = new StringBuilder();
 		
@@ -73,6 +73,46 @@ public class CategoryDao {
 		}			
 		
 		List<Category> result = query.getResultList();
+		
+		return result;
+	}
+	
+	public List<Category> getSubCategories(CategorySearchOptions options) {
+		
+		StringBuilder predicate = new StringBuilder();
+		
+		if(options.getId() != null){
+			predicate.append("category.parentCategory.id = :categoryId");
+		}
+
+		if(options.getOrder() != null){
+			predicate.append(" order by category.");
+			predicate.append(options.getOrder().getValue());
+			if(options.isDesc()){
+				predicate.append(" desc");
+			}
+		}		
+		
+		TypedQuery<Category> query = manager.createQuery(
+				"SELECT category FROM training.osms.business.Category category where " + predicate, 
+				Category.class);
+		
+		
+		if(options.getId() != null){
+			query.setParameter("categoryId", options.getId());
+		}
+		if (options.getStartPosition() != null){
+			query.setFirstResult(options.getStartPosition());
+		}			
+		if (options.getMaxResults() != null){
+			query.setMaxResults(options.getMaxResults());
+		}			
+		
+		List<Category> result = query.getResultList();
+		
+		for (Category cat: result){
+			System.out.println(cat.getName());
+		}
 		
 		return result;
 	}
@@ -127,6 +167,10 @@ public class CategoryDao {
 	private StringBuilder toPredicate(CategorySearchOptions options) {
 		StringBuilder predicate = new StringBuilder("1 = 1"); // s??? para a concatena??????o funcionar perfeitamente por causa dos ands
 		
+		if(options.getId() != null ){
+			predicate.append(" and category.id = :categoryId");
+		}
+		
 		if(options.getName() != null && options.getName().length() > 0){
 			predicate.append(" and upper(category.name) like :categoryName");
 		}
@@ -144,6 +188,9 @@ public class CategoryDao {
 		}
 		if(options.getDescription() != null && options.getDescription().length() > 0){
 			query.setParameter("categoryDescription", "%" + options.getDescription().toUpperCase() + "%");
+		}
+		if(options.getId() != null){
+			query.setParameter("categoryId", options.getId());
 		}
 	}
 	

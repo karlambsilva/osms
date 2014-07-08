@@ -32,7 +32,12 @@ public class ProductController {
 	
 	@Transactional
 	public void deleteProduct(Product product) {
-		dao.deleteProduct(product);
+		product = dao.searchProduct(product.getName());
+		if (product.getOrders() == null || product.getOrders().size() == 0){
+			dao.deleteProduct(product);
+		}else{
+			throw new BusinessException("Ops! You cannot delete this product.");
+		}
 	}
 	
 	@Transactional

@@ -32,7 +32,7 @@ public class OrderController {
 	
 	@Transactional
 	public void deleteOrder(Order order) {
-		dao.deleteOrder(order);
+		throw new BusinessException("Ops! You cannot delete orders.");		
 	}
 	
 	@Transactional

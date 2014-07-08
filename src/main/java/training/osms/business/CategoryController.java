@@ -36,7 +36,12 @@ public class CategoryController {
 	
 	@Transactional
 	public void deleteCategory(Category category) {
-		dao.deleteCategory(category);
+		category = dao.searchCategory(category.getName());
+		if (category.getProducts() == null || category.getProducts().size() == 0){
+			dao.deleteCategory(category);
+		}else{
+			throw new BusinessException("Ops! You cannot delete this category.");
+		}
 	}
 	
 	@Transactional

@@ -167,14 +167,19 @@ public class SearchCategory {
 	}
 	
 	public void confirmDeletion(){
-		controller.deleteCategory(form.getCategory());
-		this.categoryDeleted = true; // disable delete button. evita do usu???rio tentar deletar a mesma coisa 2x
-		reset();
 		
 		FacesMessage message = new FacesMessage();
-		message.setSummary("Category successufully deleted");
-		message.setSeverity(FacesMessage.SEVERITY_INFO);
-
+		
+		try{
+			controller.deleteCategory(form.getCategory());
+			this.categoryDeleted = true; // disable delete button. evita do usu???rio tentar deletar a mesma coisa 2x
+			reset();
+			message.setSummary("Category successufully deleted");
+			message.setSeverity(FacesMessage.SEVERITY_INFO);
+		}catch(BusinessException e){
+			message.setSummary(e.getMessage());
+			message.setSeverity(FacesMessage.SEVERITY_ERROR);
+		}	
 		FacesContext context = FacesContext.getCurrentInstance();
 		context.addMessage(null, message);
 	}

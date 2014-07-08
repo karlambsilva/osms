@@ -50,6 +50,7 @@ public class SearchProduct {
 	}
 	
 	public ProductSearchOptions getOptions() {
+		
 		return options;
 	}
 	
@@ -160,18 +161,21 @@ public class SearchProduct {
 	
 	public void confirmDeletion(){		
 		
-		controller.deleteProduct(form.getProduct());
-		this.productDeleted = true;
-		reset();
-		
 		FacesMessage message = new FacesMessage();
-		message.setSummary("Product successufully deleted");
-		message.setSeverity(FacesMessage.SEVERITY_INFO);
-
+		
+		try{
+			controller.deleteProduct(form.getProduct());
+			this.productDeleted = true;
+			reset();
+			message.setSummary("Product successufully deleted");
+			message.setSeverity(FacesMessage.SEVERITY_INFO);
+		}catch(BusinessException e){
+			message.setSummary(e.getMessage());
+			message.setSeverity(FacesMessage.SEVERITY_ERROR);
+		}	
+		
 		FacesContext context = FacesContext.getCurrentInstance();
 		context.addMessage(null, message);
-		
-		
 	}
 
 	

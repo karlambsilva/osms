@@ -182,14 +182,18 @@ public class SearchOrder {
 	}
 	
 	public void confirmDeletion(){
-		controller.deleteOrder(form.getOrder());
-		this.orderDeleted = true; // disable delete button. evita do usu???rio tentar deletar a mesma coisa 2x
-		reset();
+		
 		
 		FacesMessage message = new FacesMessage();
-		message.setSummary("Order successufully deleted");
-		message.setSeverity(FacesMessage.SEVERITY_INFO);
-
+		
+		try{
+			controller.deleteOrder(form.getOrder());
+			this.orderDeleted = true; // disable delete button. evita do usu???rio tentar deletar a mesma coisa 2x
+			reset();
+		}catch(BusinessException e){
+			message.setSummary(e.getMessage());
+			message.setSeverity(FacesMessage.SEVERITY_ERROR);
+		}	
 		FacesContext context = FacesContext.getCurrentInstance();
 		context.addMessage(null, message);
 	}

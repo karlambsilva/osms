@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:osms="http://java.sun.com/jsf/composite/osms"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+
+	<script src="/osms/lib/jquery.min.js"></script>
+
+	<link href="/osms/lib/bootstrap-bootswatch/css/bootstrap.css"
+		rel="stylesheet" />
+	<script src="/osms/lib/bootstrap-3.1.1-dist/js/bootstrap.min.js"></script>
+
+	<link href="/osms/lib/bootstrap-bootswatch/css/bootswatch.min.css"
+		rel="stylesheet" />
+	<script src="/osms/lib/bootstrap-bootswatch/js/bootswatch.js"></script>
+	
+	<link href="/osms/lib/datepicker/css/datepicker.css" rel="stylesheet" />
+	<script src="/osms/lib/datepicker/js/bootstrap-datepicker.js"></script>
+	
+	<style>
+		.carousel-control.left, .carousel-control.right{ 
+			background: none !important; 
+			filter: progid:none !important; 
+		}
+		#msg-sign-up-ok{
+			display:none;
+		}
+		
+		.thumbnail img { 
+			height:200px;
+			weight: 242px; 
+		}
+	</style>
+
+	<title>E-Commerce</title>
+</h:head>
+<body>
+	<!-- 
+		MENU PRINCIPAL
+	 -->
+	<div class="navbar navbar-default navbar-fixed-top">
+		<div class="container">
+			<div class="navbar-header">
+				<a href="http://localhost:9090/osms/faces/public/home.xhtml" class="navbar-brand">E-Commerce</a>
+				<button class="navbar-toggle" type="button" data-toggle="collapse"
+					data-target="#navbar-main">
+					<span class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+			</div>
+			<div class="navbar-collapse collapse" id="navbar-main">
+				<ul class="nav navbar-nav">
+					
+				</ul>
+
+				<ul class="nav navbar-nav navbar-right">
+					<li>
+						<a href="http://localhost:9090/osms/faces/category/searchCategory.xhtml" target="_blank">Cart &nbsp;
+							<span class="glyphicon glyphicon-shopping-cart"></span>
+						</a>
+						 
+					</li>
+				
+				
+					<li>
+					<a href="http://localhost:9090/osms/faces/category/searchCategory.xhtml" target="_blank">Administrative Panel</a></li>
+				</ul>
+
+			</div>
+		</div>
+	</div> <!-- FIM DA DIV DO MENU PRINCIPAL -->
+	<!-- 
+		CONTAINER
+	 -->
+	<div class="container">
+		<div class="page-header">
+			<div class="row">
+				<!-- 
+					MENU LATERAL
+				 -->
+	      		<div class="col-lg-4 bs-docs-sidebar">
+	        		<ul class="nav nav-pills nav-stacked" style="max-width: 300px;">
+	        			<li class="active"><a href="#">All Categories</a></li>
+	        			<ui:repeat var="parentCategory" value="#{showStore.parentCategories}">
+							<li><a href="/osms/faces/public/showCategory.xhtml?categoryId=#{parentCategory.id}">#{parentCategory.name}</a></li>
+						</ui:repeat>
+					</ul>
+      			</div> <!-- FIM DA DIV DO MENU LATERAL -->
+      			
+      			<!-- 
+					BANNER
+				 -->
+				 
+				<div id="myCarousel" class="carousel slide col-lg-8">
+					<ol class="carousel-indicators">
+				    	<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+				    	<li data-target="#myCarousel" data-slide-to="1"></li>
+				    	<li data-target="#myCarousel" data-slide-to="2"></li>
+				  	</ol>
+				  <!-- Carousel items -->
+				  <div class="carousel-inner">
+				  <ui:repeat var="category" value="#{showCategory.subCategories}">
+					<h2>
+						<a href="/osms/faces/public/showCategory.xhtml?categoryId=#{category.id}">
+							#{category.name}
+							#{category.description}
+						</a>		
+					</h2>
+				</ui:repeat>
+				  
+				    <div class="active item jumbotron">
+						<h1>Deals</h1>
+					  	<p>This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+					  	<p><a class="btn btn-primary btn-lg">Learn more</a></p>
+					</div>
+				    <div class="item jumbotron">
+				    	<h1>Jumbotron</h1>
+					  	<p>This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+					  	<p><a class="btn btn-primary btn-lg">Learn more</a></p>
+				    </div>
+				    <div class="item jumbotron">
+				    	<h1>Jumbotron</h1>
+					  	<p>This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+					  	<p><a class="btn btn-primary btn-lg">Learn more</a></p>
+				    </div>
+				  </div>
+				  <!-- Carousel nav -->
+				<a class="carousel-control left" href="#myCarousel" data-slide="prev">
+        			<span class="glyphicon glyphicon-chevron-left"></span>
+				</a>
+				
+				
+			    <a class="carousel-control right" href="#myCarousel" data-slide="next">
+			        <span class="glyphicon glyphicon-chevron-right"></span>
+			    </a>
+				
+			</div> <!-- FIM DA DIV DOS BANNERS (CAROUSEL) -->
+      		
+		</div> <!-- FIM DA DIV ROW -->
+		</div> <!-- FIM DA DIV PAGE HEADER -->
+		<div class="page-header">
+			<div class="row">
+				<div class="alert alert-dismissable alert-success" id ="msg-sign-up-ok">
+				  <button type="button" class="close" data-dismiss="alert">&#215;</button>
+				  <strong>Well done!</strong> You successfully sign up for our deals!
+				</div>
+				<div class="form-group">
+	                  <label class="control-label">Sign up for our daily deal alert: </label>
+	                  <div class="input-group">
+	                    <span class="input-group-addon">@</span>
+	                    <h:inputText class="form-control"></h:inputText>
+	                    <span class="input-group-btn">
+	                      <button class="btn btn-primary" type="button" onclick="SignUpOK()">Submit</button>
+	                    </span>
+	                  </div>
+	            </div>
+			</div> <!-- FIM DA DIV ROW DO SIGN UP-->
+			</div>
+			<div class="page-header">
+			<div class="row">			
+				<ui:repeat var="product" value="#{showStore.products}">
+					<div class="col-sm-6 col-md-4">
+					    <div class="thumbnail">
+					    	<img src="#{product.image}" alt="..."/>
+					      		<div class="caption">
+					        		<h3>#{product.name}</h3>
+					        		<p>#{product.description}</p>
+					        		<p>
+					        			<a href="#" class="btn btn-primary" role="button">Button</a> 
+					        		</p>
+					      		</div>
+					    	</div>
+					  	</div>
+				</ui:repeat>
+			
+			</div>
+		
+		</div>	
+	</div> <!-- FIM DA DIV CONTAINER -->
+	
+	<script type="text/javascript">
+		// <![CDATA[
+			var $ = jQuery.noConflict(); 
+			$(document).ready(function()  {
+				$('#myCarousel').carousel({ 
+					interval: 3000, cycle: true 
+				}); 
+			});
+			// ]]>
+		
+			function SignUpOK() {
+			    document.getElementById("msg-sign-up-ok").style.display = "block";
+			}
+		
+	</script>
+</body>
+</html>

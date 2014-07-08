@@ -10,19 +10,46 @@
 		<f:viewParam name="productId" value="#{showProduct.productId}"></f:viewParam>
 	</f:metadata>
 	
-	<h:head>
-		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+	<ui:composition template="/templateStore.xhtml">  
 		
-		<script src="/osms/lib/jquery.min.js"></script>
+		<ui:define name="title">
+			#{showProduct.product.name} :: E-Commerce
+		</ui:define>
 		
-		<link href="/osms/lib/bootstrap-3.1.1-dist/css/bootstrap.min.css"
-			rel="stylesheet" />
-		<script src="/osms/lib/bootstrap-3.1.1-dist/js/bootstrap.min.js"></script>
+		<ui:define name="content_top">
+			<div class="alert alert-dismissable alert-success" id ="msg-added-to-cart">
+			  <button type="button" class="close" data-dismiss="alert">&#215;</button>
+			  <strong>Well done!</strong> You successfully sign up for our deals!
+			</div>
+			<div class="media">
+				<h2 class="media-heading">#{showProduct.product.name}</h2>
+	      		<a class="pull-left" href="#">
+	       	 		<img class="media-object" src="#{showProduct.product.image}" alt="Generic placeholder image"/>
+	      		</a>
+	      		<div class="media-body">
+	        		#{showProduct.product.description}
+	        	</div>
+	      		<br/>
+    			<button class="btn btn-primary" type="button" >
+    				Add to Cart   			
+    			</button>
+    		</div>
+		</ui:define>
 		
-		<title><ui:insert name="title"></ui:insert></title>
-	</h:head>
+		<ui:define name="content_middle">
+			E-Commerce
+		</ui:define>
+		
+		<ui:define name="content_bottom">
+			E-Commerce
+		</ui:define>
+		
+	</ui:composition>
+</html>
+	
+	
+	
+	<!--
 	<body>
 		<div class="container" style="text-align:justify;">
 			<h1 class="page-header">
@@ -39,4 +66,4 @@
 		</div>
 		
 	</body>
-</html>
+</html>-->

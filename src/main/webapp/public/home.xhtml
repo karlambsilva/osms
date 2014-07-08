@@ -29,6 +29,11 @@
 		#msg-sign-up-ok{
 			display:none;
 		}
+		
+		.thumbnail img { 
+			height:200px;
+			weight: 242px; 
+		}
 	</style>
 
 	<title>E-Commerce</title>
@@ -53,6 +58,14 @@
 				</ul>
 
 				<ul class="nav navbar-nav navbar-right">
+					<li>
+						<a href="http://localhost:9090/osms/faces/category/searchCategory.xhtml" target="_blank">Cart &nbsp;
+							<span class="glyphicon glyphicon-shopping-cart"></span>
+						</a>
+						 
+					</li>
+				
+				
 					<li>
 					<a href="http://localhost:9090/osms/faces/category/searchCategory.xhtml" target="_blank">Administrative Panel</a></li>
 				</ul>
@@ -90,8 +103,17 @@
 				  	</ol>
 				  <!-- Carousel items -->
 				  <div class="carousel-inner">
+				  <ui:repeat var="category" value="#{showCategory.subCategories}">
+					<h2>
+						<a href="/osms/faces/public/showCategory.xhtml?categoryId=#{category.id}">
+							#{category.name}
+							#{category.description}
+						</a>		
+					</h2>
+				</ui:repeat>
+				  
 				    <div class="active item jumbotron">
-						<h1>Jumbotron</h1>
+						<h1>Deals</h1>
 					  	<p>This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
 					  	<p><a class="btn btn-primary btn-lg">Learn more</a></p>
 					</div>
@@ -143,7 +165,7 @@
 				<ui:repeat var="product" value="#{showStore.products}">
 					<div class="col-sm-6 col-md-4">
 					    <div class="thumbnail">
-					    	<img src="#{product.image}" alt="..." height="100" width="200"/>
+					    	<img src="#{product.image}" alt="..."/>
 					      		<div class="caption">
 					        		<h3>#{product.name}</h3>
 					        		<p>#{product.description}</p>

@@ -137,8 +137,11 @@
 				var $ = jQuery.noConflict(); 
 				$(document).ready(function()  {
 					$('#myCarousel').carousel({ 
-						interval: 3000, cycle: true 
+						interval: 3000, 
+						cycle: true
 					}); 
+					
+					$('#myCarousel').find('.item:first').addClass('active');
 				});
 				// ]]>
 			

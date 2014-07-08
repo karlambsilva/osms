@@ -23,22 +23,16 @@
 			    	<li data-target="#myCarousel" data-slide-to="2"></li>
 			  	</ol>
 				<!-- Carousel items -->
-			  	<div class="carousel-inner">				  
-				    <div class="active item jumbotron">
-						<h1>Deals</h1>
-					  	<p>This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
-					  	<p><a class="btn btn-primary btn-lg">Learn more</a></p>
-					</div>
-				    <div class="item jumbotron">
-				    	<h1>Jumbotron</h1>
-					  	<p>This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
-					  	<p><a class="btn btn-primary btn-lg">Learn more</a></p>
-				    </div>
-				    <div class="item jumbotron">
-				    	<h1>Jumbotron</h1>
-					  	<p>This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
-					  	<p><a class="btn btn-primary btn-lg">Learn more</a></p>
-				    </div>
+			  	<div class="carousel-inner">			  		
+					#{showStore.setCategoryId(showCategory.categoryId)}
+			  		<ui:repeat var="product" value="#{showStore.deals}" >
+			  			<div class="item jumbotron">
+				  			<h1>#{product.name}</h1>
+				  			<h2>$ #{product.price}</h2>
+						  	<p>#{product.description}</p>
+						  	<p><a href = "" class="btn btn-primary btn-lg">Get the Deal</a></p>		
+						</div>	  		
+					</ui:repeat>			   
 				</div>
 				<!-- Carousel nav -->
 				<a class="carousel-control left" href="#myCarousel" data-slide="prev">
@@ -51,7 +45,7 @@
 		</ui:define>
 		
 		<ui:define name="content_middle">
-			<ui:repeat var="product" value="#{showStore.products}">
+			<ui:repeat var="product" value="#{showStore.allProducts}">
 				<div class="col-sm-6 col-md-4">
 				    <div class="thumbnail">
 				    	<a href="http://localhost:9090/osms/faces/public/showProduct.xhtml?productId=#{product.id}">
@@ -59,6 +53,7 @@
 				    	</a>
 			      		<div class="caption">
 			        		<h3>#{product.name}</h3>
+			        		<h4>#{product.price}</h4>
 			        		<p>#{product.description}</p>
 			        		<p>
 			        			<h:form>

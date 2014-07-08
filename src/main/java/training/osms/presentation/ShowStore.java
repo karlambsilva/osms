@@ -22,6 +22,7 @@ public class ShowStore {
 	
 	private List<Category> parentCategories;
 	private List<Category> subCategories;
+	private List<Product> deals;
 	private List<Product> products;
 	private int categoryId;
 
@@ -63,25 +64,42 @@ public class ShowStore {
 	}
 	
 	
-	public List<Product> getProducts() {
-		products = productController.searchProduct(new ProductSearchOptions());
+	public List<Product> getDeals() {
+		deals = productController.searchProduct(new ProductSearchOptions());
 		List<Product> auxiliar = new ArrayList<>();
 		Random rand = new Random();
 		int counter = 0;
-		while (counter < 6){
-			int  n = rand.nextInt(products.size());
-			if (!auxiliar.contains(products.get(n))){
-				auxiliar.add(products.get(n));
+		while (counter < 3){
+			int  n = rand.nextInt(deals.size());
+			if (!auxiliar.contains(deals.get(n))){
+				auxiliar.add(deals.get(n));
 				counter++;
 			}			
 		}		
 		return auxiliar;		
 	}
 	
+	public void setDeals(List<Product> prod) {
+		this.deals = prod;
+	}
+	
+	public List<Product> getProducts() {
+		ProductSearchOptions options  = new ProductSearchOptions();
+		options.setCategoryId(getCategoryId());
+		
+		products = productController.searchProduct(options);
+		
+		return products;
+	}
+	
+	public List<Product> getAllProducts() {		
+		products = productController.searchProduct(new ProductSearchOptions());
+		
+		return products;
+	}
+	
 	public void setProducts(List<Product> products) {
 		this.products = products;
 	}
-	
-
 
 }

@@ -21,21 +21,47 @@ import training.osms.business.ProductSearchOptions;
 public class ShowStore {
 	
 	private List<Category> parentCategories;
+	private List<Category> subCategories;
 	private List<Product> products;
+	private int categoryId;
 
 	private @Autowired CategoryController controller;
 	private @Autowired ProductController productController;
 	
+	
+	public int getCategoryId() {
+		return categoryId;
+	}
+	
+	public void setCategoryId(int categoryId) {
+		this.categoryId = categoryId;
+	}
+	
 	public List<Category> getParentCategories() {
 		CategorySearchOptions options = new CategorySearchOptions();
 		
-		parentCategories = controller.searchParentCategories(options);
+		parentCategories = controller.searchParentCategories(options);	
+		
 		return parentCategories;
 	}
 	
 	public void setParentCategories(List<Category> parentCategories) {
 		this.parentCategories = parentCategories;
 	}
+	
+	public List<Category> getSubCategories() {
+		CategorySearchOptions options = new CategorySearchOptions();
+		options.setParentCatId(categoryId);
+		
+		subCategories = controller.searchCategory(options);
+		
+		return subCategories;
+	}
+	
+	public void setSubCategories(List<Category> subCategories) {
+		this.subCategories = subCategories;
+	}
+	
 	
 	public List<Product> getProducts() {
 		products = productController.searchProduct(new ProductSearchOptions());
@@ -56,6 +82,6 @@ public class ShowStore {
 		this.products = products;
 	}
 	
-	
+
 
 }

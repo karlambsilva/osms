@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:osms="http://java.sun.com/jsf/composite/osms"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+	
+	<f:metadata>
+		<f:viewParam name="categoryId" value="#{showCategory.categoryId}"></f:viewParam>
+	</f:metadata>
+		
+	<ui:composition template="/templateStore.xhtml">  
+		
+		<ui:define name="title">
+			Cart :: E-Commerce
+		</ui:define>
+		<ui:define name="content_top">
+		
+			<h:form>
+				<h:dataTable value="#{newOrder.form.products}"
+							 var="product"
+							 styleClass="table table-bordered table-condensed table-hover table-striped"
+							 columnClasses="col-sm-5,col-sm-6"
+							 rendered="#{newOrder.form.products.isEmpty() == false}">
+					<h:column>
+						<f:facet name="header">
+							Product Name
+						</f:facet>
+						#{product.name}
+					</h:column>
+					
+					<h:column>
+						<f:facet name="header">
+							Price
+						</f:facet>				
+						#{product.price}
+					</h:column>
+				</h:dataTable>
+				
+				<h:commandButton styleClass="btn btn-primary" 
+										 value="Checkout"
+										 action="#{newOrder.saveOrder}"
+										 rendered="#{newOrder.form.products.isEmpty() == false}"/> 
+										 
+				<div style="display:#{newOrder.emptyCart}">
+					<div class="alert alert-warning alert-dismissible" role="alert">
+						<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+					  	<strong>Ops!</strong> No items to display.
+					</div>
+					<img src="http://honkweed.com/images/empty-cart.jpg" alt="Empty Cart"/>
+				</div> 
+				
+	
+			</h:form>		 
+		</ui:define>
+		
+		<ui:define name="content_middle">
+			
+		</ui:define>
+		<ui:define name="content_bottom">
+		
+		</ui:define>
+	</ui:composition>
+</html>

@@ -8,11 +8,7 @@ import javax.faces.context.FacesContext;
 import org.springframework.context.ApplicationContext;
 import org.springframework.web.jsf.FacesContextUtils;
 
-import training.osms.business.Category;
-import training.osms.business.CategoryController;
-import training.osms.business.CategorySearchOptions;
 import training.osms.business.Order;
-import training.osms.business.OrderController;
 import training.osms.business.Product;
 import training.osms.business.ProductController;
 import training.osms.business.ProductSearchOptions;
@@ -27,8 +23,7 @@ public class OrderForm {
 		FacesContext facesContext = FacesContext.getCurrentInstance();
 		ApplicationContext applicationContext = FacesContextUtils.getWebApplicationContext(facesContext);
 		
-		ProductController controller = applicationContext.getBean(ProductController.class);
-		products = controller.searchProduct(new ProductSearchOptions());
+		products = new ArrayList<>();
 		
 		order = new Order();
 	}
@@ -49,7 +44,11 @@ public class OrderForm {
 		this.products = products;
 	}
 	
+	/*
 	public void setProductIds(List<String> productIds) {
+		
+		ProductController controller = applicationContext.getBean(ProductController.class);
+		products = controller.searchProduct(new ProductSearchOptions());
 		
 		List<Product> productsAuxiliar = new ArrayList<>();
 		
@@ -75,6 +74,6 @@ public class OrderForm {
 			}
 		}
 		return productIds;
-	}
+	}*/
 	
 }

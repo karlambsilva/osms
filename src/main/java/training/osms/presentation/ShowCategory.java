@@ -1,5 +1,6 @@
 package training.osms.presentation;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -79,5 +80,6 @@ public class ShowCategory {
 	public void setSubCategories(List<Category> subCategories) {
 		this.subCategories = subCategories;
 	}
+	
 	
 }

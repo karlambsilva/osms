@@ -11,7 +11,7 @@
 		<ui:define name="title">
 			E-Commerce
 		</ui:define>
-		
+				
 		<ui:define name="content_top">
 			<!-- 
 				BANNER
@@ -61,7 +61,11 @@
 			        		<h3>#{product.name}</h3>
 			        		<p>#{product.description}</p>
 			        		<p>
-			        			<a href="#" class="btn btn-primary" role="button">Add to Cart</a> 
+			        			<h:form>
+				        			<h:commandButton styleClass="btn btn-primary" 
+											value="Add to Cart"
+										 action="#{newOrder.addProductToCart(product)}" ></h:commandButton>
+								</h:form>
 			        		</p>
 			      		</div>
 			    	</div>

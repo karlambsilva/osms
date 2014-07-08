@@ -69,9 +69,9 @@ public class ShowCategory {
 	
 	public List<Category> getSubCategories() {
 		CategorySearchOptions options = new CategorySearchOptions();
-		options.setId(categoryId);
+		options.setParentCatId(categoryId);
 		
-		subCategories = controller.searchSubCategories(options);
+		subCategories = controller.searchCategory(options);
 		
 		return subCategories;
 	}

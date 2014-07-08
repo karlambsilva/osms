@@ -71,10 +71,9 @@
 				 -->
 	      		<div class="col-lg-4 bs-docs-sidebar">
 	        		<ul class="nav nav-pills nav-stacked" style="max-width: 300px;">
-	        			<li class="active"><a href="#">All Categories</a></li>
-	        			<ui:repeat var="parentCategory" value="#{showStore.parentCategories}">
-							<li><a href="/osms/faces/public/showCategory.xhtml?categoryId=#{parentCategory.id}">#{parentCategory.name}</a></li>
-						</ui:repeat>
+				  		<li class="active"><a href="#">Home</a></li>
+			  			<li><a href="#">Profile</a></li>
+						<li><a href="#">Profile</a></li>
 					</ul>
       			</div> <!-- FIM DA DIV DO MENU LATERAL -->
       			
@@ -139,22 +138,73 @@
 			</div> <!-- FIM DA DIV ROW DO SIGN UP-->
 			</div>
 			<div class="page-header">
-			<div class="row">			
-				<ui:repeat var="product" value="#{showStore.products}">
-					<div class="col-sm-6 col-md-4">
-					    <div class="thumbnail">
-					    	<img src="#{product.image}" alt="..." height="100" width="200"/>
-					      		<div class="caption">
-					        		<h3>#{product.name}</h3>
-					        		<p>#{product.description}</p>
-					        		<p>
-					        			<a href="#" class="btn btn-primary" role="button">Button</a> 
-					        		</p>
-					      		</div>
-					    	</div>
-					  	</div>
-				</ui:repeat>
-			
+			<div class="row">
+			  <div class="col-sm-6 col-md-4">
+			    <div class="thumbnail">
+			      <img data-src="holder.js/300x300" alt="..."/>
+			      <div class="caption">
+			        <h3>Thumbnail label</h3>
+			        <p>...</p>
+			        <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
+			      </div>
+			    </div>
+			  </div>
+			  
+			  <div class="col-sm-6 col-md-4">
+			    <div class="thumbnail">
+			      <img data-src="holder.js/300x300" alt="..."/>
+			      <div class="caption">
+			        <h3>Thumbnail label</h3>
+			        <p>...</p>
+			        <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
+			      </div>
+			    </div>
+			  </div>
+			  
+			  <div class="col-sm-6 col-md-4">
+			    <div class="thumbnail">
+			      <img data-src="holder.js/300x300" alt="..."/>
+			      <div class="caption">
+			        <h3>Thumbnail label</h3>
+			        <p>...</p>
+			        <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
+			      </div>
+			    </div>
+			  </div>
+			  
+			   <div class="col-sm-6 col-md-4">
+			    <div class="thumbnail">
+			      <img data-src="holder.js/300x300" alt="..."/>
+			      <div class="caption">
+			        <h3>Thumbnail label</h3>
+			        <p>...</p>
+			        <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
+			      </div>
+			    </div>
+			  </div>
+			  
+			  <div class="col-sm-6 col-md-4">
+			    <div class="thumbnail">
+			      <img data-src="holder.js/300x300" alt="..."/>
+			      <div class="caption">
+			        <h3>Thumbnail label</h3>
+			        <p>...</p>
+			        <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
+			      </div>
+			    </div>
+			  </div>
+			  
+			   <div class="col-sm-6 col-md-4">
+			    <div class="thumbnail">
+			      <img data-src="holder.js/300x300" alt="..."/>
+			      <div class="caption">
+			        <h3>Thumbnail label</h3>
+			        <p>...</p>
+			        <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
+			      </div>
+			    </div>
+			  </div>
+			  
 			</div>
 		
 		</div>	

@@ -21,6 +21,7 @@ public class CategorySearchOptions {
 	private Integer id;
 	private String name;
 	private String description;
+	private Integer parentCatId;
 	
 	private boolean desc;
 	private Order order;
@@ -85,6 +86,14 @@ public class CategorySearchOptions {
 	
 	public void setId(Integer id) {
 		this.id = id;
+	}
+	
+	public Integer getParentCatId() {
+		return parentCatId;
+	}
+	
+	public void setParentCatId(Integer parentCatId) {
+		this.parentCatId = parentCatId;
 	}
 
 	@Override

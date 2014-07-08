@@ -3,8 +3,6 @@ package training.osms.persistence;
 import java.util.List;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityTransaction;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
@@ -76,46 +74,6 @@ public class CategoryDao {
 		
 		return result;
 	}
-	
-	public List<Category> searchSubCategories(CategorySearchOptions options) {
-		
-		StringBuilder predicate = new StringBuilder();
-		
-		if(options.getId() != null){
-			predicate.append("category.parentCategory.id = :categoryId");
-		}
-
-		if(options.getOrder() != null){
-			predicate.append(" order by category.");
-			predicate.append(options.getOrder().getValue());
-			if(options.isDesc()){
-				predicate.append(" desc");
-			}
-		}		
-		
-		TypedQuery<Category> query = manager.createQuery(
-				"SELECT category FROM training.osms.business.Category category where " + predicate, 
-				Category.class);
-		
-		
-		if(options.getId() != null){
-			query.setParameter("categoryId", options.getId());
-		}
-		if (options.getStartPosition() != null){
-			query.setFirstResult(options.getStartPosition());
-		}			
-		if (options.getMaxResults() != null){
-			query.setMaxResults(options.getMaxResults());
-		}			
-		
-		List<Category> result = query.getResultList();
-		
-		for (Category cat: result){
-			System.out.println(cat.getName());
-		}
-		
-		return result;
-	}
 
 	public List<Category> searchCategory(CategorySearchOptions options) {
 		
@@ -148,6 +106,36 @@ public class CategoryDao {
 		return result;
 	}
 	
+	public List<Category> searchParentCategories(CategorySearchOptions options) {
+		
+		StringBuilder predicate = new StringBuilder();
+
+		if(options.getOrder() != null){
+			predicate.append(" order by category.");
+			predicate.append(options.getOrder().getValue());
+			if(options.isDesc()){
+				predicate.append(" desc");
+			}
+		}		
+		
+		TypedQuery<Category> query = manager.createQuery(
+				"SELECT category FROM training.osms.business.Category category where category.parentCategory.id IS NULL ", 
+				Category.class);
+		
+		
+		if (options.getStartPosition() != null){
+			query.setFirstResult(options.getStartPosition());
+		}			
+		if (options.getMaxResults() != null){
+			query.setMaxResults(options.getMaxResults());
+		}			
+		
+		List<Category> result = query.getResultList();
+		
+		return result;
+	}
+	
+	
 	public int searchCategoryCount(CategorySearchOptions options) {
 
 		StringBuilder predicate = toPredicate(options);			
@@ -171,6 +159,10 @@ public class CategoryDao {
 			predicate.append(" and category.id = :categoryId");
 		}
 		
+		if(options.getParentCatId() != null){
+			predicate.append(" and category.parentCategory.id = :parentCategoryId");
+		}
+		
 		if(options.getName() != null && options.getName().length() > 0){
 			predicate.append(" and upper(category.name) like :categoryName");
 		}
@@ -192,6 +184,9 @@ public class CategoryDao {
 		if(options.getId() != null){
 			query.setParameter("categoryId", options.getId());
 		}
+		if(options.getParentCatId() != null){
+			query.setParameter("parentCategoryId", options.getParentCatId());
+		}
 	}
 	
 	public void deleteCategory(Category category) {		
@@ -202,4 +197,6 @@ public class CategoryDao {
 	public void updateCategory(Category category) {
 		manager.merge(category); // o merge vai procurar uma categoria e atualiza-la		
 	}
+
+
 }

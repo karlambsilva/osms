@@ -26,7 +26,8 @@
 	<body>
 		<div class="container">
 			<h1 class="page-header">#{showCategory.category.name}</h1>
-			#{showCategory.subCategories}
+			sub #{showCategory.subCategories} end sub 
+			pais #{showStore.parentCategories}
 			<ui:repeat var="category" value="#{showCategory.subCategories}">
 				<h2>
 					<a href="/osms/faces/public/showCategory.xhtml?categoryId=#{category.id}">

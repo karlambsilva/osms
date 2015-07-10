@@ -29,7 +29,7 @@
 				background: none !important; 
 				filter: progid:none !important; 
 			}
-			#msg-sign-up-ok, #msg-added-to-cart{
+			#msg-sign-up-ok, #msg-added-to-cart, #msg-compra-ok{
 				display:none;
 			}
 			
@@ -151,6 +151,10 @@
 				
 				function AddedToCart() {
 				    document.getElementById("msg-added-to-cart").style.display = "block";
+				}
+				
+				function CompraOK() {
+				    document.getElementById("msg-compra-ok").style.display = "block";
 				}
 			
 		</script>		

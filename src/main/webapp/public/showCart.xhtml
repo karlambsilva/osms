@@ -17,6 +17,10 @@
 		</ui:define>
 		<ui:define name="content_top">
 		
+		<div class="alert alert-dismissable alert-success" id ="msg-compra-ok">
+			  <button type="button" class="close" data-dismiss="alert">&#215;</button>
+			  <strong>Well done!</strong>Order Complete!
+			</div>
 			<h:form>
 				<h:dataTable value="#{newOrder.form.products}"
 							 var="product"
@@ -41,7 +45,7 @@
 				<h:commandButton styleClass="btn btn-primary" 
 										 value="Checkout"
 										 action="#{newOrder.saveOrder}"
-										 rendered="#{newOrder.form.products.isEmpty() == false}"/> 
+										 rendered="#{newOrder.form.products.isEmpty() == false}" onclick="CompraOK()"/> 
 										 
 				<div style="display:#{newOrder.emptyCart}">
 					<div class="alert alert-warning alert-dismissible" role="alert">

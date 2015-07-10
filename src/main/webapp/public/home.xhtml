@@ -30,7 +30,7 @@
 				  			<h1>#{product.name}</h1>
 				  			<h2>$ #{product.price}</h2>
 						  	<p>#{product.description}</p>
-						  	<p><a href = "" class="btn btn-primary btn-lg">Get the Deal</a></p>		
+						  	<p><a href = "http://localhost:9090/osms/faces/public/showProduct.xhtml?productId=#{product.id}" class="btn btn-primary btn-lg">Get the Deal</a></p>		
 						</div>	  		
 					</ui:repeat>			   
 				</div>
@@ -45,6 +45,11 @@
 		</ui:define>
 		
 		<ui:define name="content_middle">
+		
+	     	<div class="alert alert-dismissable alert-success" id ="msg-added-to-cart">
+			  <button type="button" class="close" data-dismiss="alert">&#215;</button>
+			  <strong>Well done!</strong>Product Added to Cart!
+			</div>
 			<ui:repeat var="product" value="#{showStore.allProducts}">
 				<div class="col-sm-6 col-md-4">
 				    <div class="thumbnail">
@@ -55,11 +60,12 @@
 			        		<h3>#{product.name}</h3>
 			        		<h4>#{product.price}</h4>
 			        		<p>#{product.description}</p>
-			        		<p>
+			        		<p>			        		
 			        			<h:form>
 				        			<h:commandButton styleClass="btn btn-primary" 
 											value="Add to Cart"
-										 action="#{newOrder.addProductToCart(product)}" ></h:commandButton>
+										 action="#{newOrder.addProductToCart(product)}"
+										 onclick="AddedToCartOK()" ></h:commandButton>
 								</h:form>
 			        		</p>
 			      		</div>
